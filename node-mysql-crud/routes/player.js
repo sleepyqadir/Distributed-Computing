@@ -1,6 +1,71 @@
 const fs = require("fs");
+const ip = require('ip');
+const config = require("../config.json");
+const shaheer = config.shaheer;
 
 module.exports = {
+  getUpdate : (req,res) =>{
+    let query = "INSERT INTO `players`  (SELECT * FROM `players_temp`);"; // query database to get all the players
+    let query_temp = "SELECT * FROM `players_temp` ORDER BY id ASC";
+    let query_delete = "TRUNCATE `players_temp`";
+    if(ip.address() === "10.0.75.1" ){
+      db.query(query,(err, result)=>{
+        if(err) {
+          res.redirect('/')
+        }
+        db.query(query_delete,(err,result) =>{
+          if(err){
+            console.log(err);
+            res.redirect('/')
+          }
+          console.log(result);
+        })
+        //res.redirect('/')
+        console.log(result);
+      })
+    }
+    if(ip.address() === shaheer.host){
+      db2.query(query_temp,(err,result)=>{
+        if(err){
+          console.log(err);
+          res.redirect('/')
+        }
+        //res.redirect('/');
+        result.forEach(value => {
+          let query_insert =
+              "INSERT INTO `players` (first_name, last_name, position, number, image, user_name) VALUES ('" +
+              value.first_name +
+              "', '" +
+              value.last_name +
+              "', '" +
+              value.position +
+              "', '" +
+              value.number +
+              "', '" +
+              value.image_name +
+              "', '" +
+              value.user_name +
+              "')";
+              db.query(query_insert,(err,result)=>{
+                if(err){
+                  console.log(err);
+                  res.redirect('/');
+                }
+                console.log(result);
+              })
+        });
+        db2.query(query_delete,(err,result) =>{
+          if(err){
+            console.log(err);
+            res.redirect('/')
+          }
+          console.log(result);
+        })
+        res.redirect('/');
+        //console.log(result[0].first_name);
+      })
+    }
+  },
   addPlayerPage: (req, res) => {
     res.render("add-player.ejs", {
       title: "Welcome to Socka | Add a new player",
@@ -20,8 +85,11 @@ module.exports = {
     let username = req.body.username;
     let uploadedFile = req.files.image;
     let image_name = uploadedFile.name;
+    let gender = req.body.gender;
+    
     let fileExtension = uploadedFile.mimetype.split("/")[1];
     image_name = username + "." + fileExtension;
+
 
     let usernameQuery =
       "SELECT * FROM `players` WHERE user_name = '" + username + "'";
@@ -49,7 +117,8 @@ module.exports = {
               return res.status(500).send(err);
             }
             // send the player's details to the database
-            let query =
+            if(gender == "male"){
+              let query =
               "INSERT INTO `players` (first_name, last_name, position, number, image, user_name) VALUES ('" +
               first_name +
               "', '" +
@@ -63,18 +132,66 @@ module.exports = {
               "', '" +
               username +
               "')";
-            db.query(query, (err, result) => {
-              if (err) {
-                return res.status(500).send(err);
+            
+              try{
+                db.query(query, (err, result) => {
+                  if (err) {
+                    return res.status(500).send(err);
+                  }
+                  console.log(result);
+                  //res.redirect("/");
+                });
               }
-              res.redirect("/");
-            });
-            db2.query(query, (err, result) => {
-              if (err) {
-                return res.status(500).send(err);
+              catch(e)
+              {
+                console.log(e)
               }
-              res.redirect("/");
-            });
+              try{
+                db2.query(query, (err, result) => {
+                  if (err) {
+                    return res.status(500).send(err);
+                  }
+                  console.log(result);
+                  res.redirect("/");
+                });
+              }
+              catch(e)
+              {
+                console.log(e)
+              }
+            }
+            else if(gender == "female"){
+              let query =
+              "INSERT INTO `players_temp` (first_name, last_name, position, number, image, user_name) VALUES ('" +
+              first_name +
+              "', '" +
+              last_name +
+              "', '" +
+              position +
+              "', '" +
+              number +
+              "', '" +
+              image_name +
+              "', '" +
+              username +
+              "')";
+              try{
+                db.query(query, (err, result) => {
+                  if (err) {
+                    return res.status(500).send(err);
+                  }
+                  console.log(result);
+                  res.redirect("/");
+                });
+              }
+              catch(e)
+              {
+                console.log(e)
+              }
+              
+            
+
+            }
           });
         } else {
           message =
@@ -164,7 +281,7 @@ module.exports = {
           if (err) {
             return res.status(500).send(err);
           }
-          res.redirect("/");
+          //res.redirect("/");
         });
       });
     });
@@ -172,19 +289,13 @@ module.exports = {
         if (err) {
           return res.status(500).send(err);
         }
+        //let image = result[0].image;
   
-        let image = result[0].image;
-  
-        fs.unlink(`img/${image}`, err => {
+    db2.query(deleteUserQuery, (err, result) => {
           if (err) {
             return res.status(500).send(err);
           }
-          db.query(deleteUserQuery, (err, result) => {
-            if (err) {
-              return res.status(500).send(err);
-            }
-            res.redirect("/");
-          });
+          res.redirect("/");
         });
       });
   }

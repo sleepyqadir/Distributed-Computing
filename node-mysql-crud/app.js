@@ -6,7 +6,7 @@ const path = require("path");
 const app = express();
 
 const {getHomePage} = require('./routes/index');
-const {addPlayerPage, addPlayer, deletePlayer, editPlayer, editPlayerPage} = require('./routes/player');
+const {addPlayerPage, addPlayer, deletePlayer, editPlayer, editPlayerPage,getUpdate} = require('./routes/player');
 const port = 5000;
 
 // create connection to database
@@ -72,6 +72,7 @@ app.get('/edit/:id', editPlayerPage);
 app.get('/delete/:id', deletePlayer);
 app.post('/add', addPlayer);
 app.post('/edit/:id', editPlayer);
+app.get('/update', getUpdate);
 
 
 // set the app to listen on the port
