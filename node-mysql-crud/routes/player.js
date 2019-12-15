@@ -175,18 +175,35 @@ module.exports = {
               "', '" +
               username +
               "')";
-              try{
-                db.query(query, (err, result) => {
-                  if (err) {
-                    return res.status(500).send(err);
-                  }
-                  console.log(result);
-                  res.redirect("/");
-                });
+              if(ip.address() === "10.75.0.1"){
+                try{
+                  db.query(query, (err, result) => {
+                    if (err) {
+                      return res.status(500).send(err);
+                    }
+                    console.log(result);
+                    res.redirect("/");
+                  });
+                }
+                catch(e)
+                {
+                  console.log(e)
+                }
               }
-              catch(e)
-              {
-                console.log(e)
+              else if(ip.address() === shaheer.host) {
+                try{
+                  db2.query(query, (err, result) => {
+                    if (err) {
+                      return res.status(500).send(err);
+                    }
+                    console.log(result);
+                    res.redirect("/");
+                  });
+                }
+                catch(e)
+                {
+                  console.log(e)
+                }
               }
               
             
