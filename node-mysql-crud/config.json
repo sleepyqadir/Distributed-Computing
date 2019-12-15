@@ -1,0 +1,14 @@
+{
+    "master" : {
+        "host" : "localhost",
+        "user" : "root",
+        "password" : "",
+        "database" : "socka"
+    },
+    "shaheer" :{
+        "host" : "192.168.0.111",
+        "user" : "qadiri",
+        "password" :"keela1",
+        "database" : "socka"
+    }
+}
