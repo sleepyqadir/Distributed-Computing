@@ -175,7 +175,7 @@ module.exports = {
               "', '" +
               username +
               "')";
-              if(ip.address() === "10.75.0.1"){
+              if(ip.address() === "10.0.75.1"){
                 try{
                   db.query(query, (err, result) => {
                     if (err) {
