@@ -2,6 +2,7 @@ const fs = require("fs");
 const ip = require('ip');
 const config = require("../config.json");
 const shaheer = config.shaheer;
+const qadir = config.qadir;
 
 module.exports = {
   getUpdate : (req,res) =>{
@@ -55,6 +56,47 @@ module.exports = {
               })
         });
         db2.query(query_delete,(err,result) =>{
+          if(err){
+            console.log(err);
+            res.redirect('/')
+          }
+          console.log(result);
+        })
+        res.redirect('/');
+        //console.log(result[0].first_name);
+      })
+    }
+    if(ip.address() === qadir.host){
+      db3.query(query_temp,(err,result)=>{
+        if(err){
+          console.log(err);
+          res.redirect('/')
+        }
+        //res.redirect('/');
+        result.forEach(value => {
+          let query_insert =
+              "INSERT INTO `players` (first_name, last_name, position, number, image, user_name) VALUES ('" +
+              value.first_name +
+              "', '" +
+              value.last_name +
+              "', '" +
+              value.position +
+              "', '" +
+              value.number +
+              "', '" +
+              value.image_name +
+              "', '" +
+              value.user_name +
+              "')";
+              db.query(query_insert,(err,result)=>{
+                if(err){
+                  console.log(err);
+                  res.redirect('/');
+                }
+                console.log(result);
+              })
+        });
+        db3.query(query_delete,(err,result) =>{
           if(err){
             console.log(err);
             res.redirect('/')
@@ -159,6 +201,19 @@ module.exports = {
               {
                 console.log(e)
               }
+              try{
+                db3.query(query, (err, result) => {
+                  if (err) {
+                    return res.status(500).send(err);
+                  }
+                  console.log(result);
+                  res.redirect("/");
+                });
+              }
+              catch(e)
+              {
+                console.log(e)
+              }
             }
             else if(gender == "female"){
               let query =
@@ -193,6 +248,21 @@ module.exports = {
               else if(ip.address() === shaheer.host) {
                 try{
                   db2.query(query, (err, result) => {
+                    if (err) {
+                      return res.status(500).send(err);
+                    }
+                    console.log(result);
+                    res.redirect("/");
+                  });
+                }
+                catch(e)
+                {
+                  console.log(e)
+                }
+              }
+              else if(ip.address() === qadir.host) {
+                try{
+                  db3.query(query, (err, result) => {
                     if (err) {
                       return res.status(500).send(err);
                     }
