@@ -13,11 +13,11 @@ $BRANCH =$_POST['branch'];
     }
     elseif($BRANCH=='Akram\'s Server')
     {
-        include("server2.php");
+        include("server.php");
     }
-    elseif($BRANCH=='Faisalabad')
+    elseif($BRANCH=='Qadir\'s Server');
     {
-    include("server3.php");
+    include("server.php");
     }
 }//END INSERTION
 

@@ -6,12 +6,12 @@
 
 <?php
 include("../connection.php");
-include_once("checkIP.php");
+include_once("../checkIP.php");
 ?>
 
 <html>
 <head>
- <title>Insert Patient</title>	
+ <title>Insert Doctor</title>	
 </head>
 <body>
 	<div class="centre-align">
@@ -83,6 +83,35 @@ include_once("checkIP.php");
 			echo 'Nahi howa';
 		}
 	} */
+	if($user_ip === '192.168.0.111'){ //akram ka ip dalna idhr
+            
+		$db = mysqli_connect('192.168.0.111','qadiri','keela1','dcpatient');  //akram k credentials
+			
+			$user_check_query = "SELECT * FROM method_type ORDER BY ID DESC LIMIT 1";
+			$result = mysqli_query($db, $user_check_query);
+			$user = mysqli_fetch_assoc($result);
+			
+			if($TRUE) 
+			{ 
+				$method = $user['Name_Method'];
+				if($method=='asyncho'){
+					echo "
+					<form class='noStyle' action='insert1.php' method='POST'>
+					<button type='submit' name='replicateInsert' class='replicate'>Replicate in HQ</button>
+					</form>";
+
+					include("../doctorAsyncho/server2tempo.php");
+				}
+				if($method=='syncho'){
+						
+					include("server.php");
+				}
+			}
+			else
+			{
+				header("location:../connection.php");
+			}
+		}
 ?>
 	</body>
 </html>

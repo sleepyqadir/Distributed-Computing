@@ -1,5 +1,5 @@
 <?php
-include("../connection.php")
+include("../connection.php");
 //initializing variables
 $fn="";
 $ln="";
@@ -8,8 +8,8 @@ $cn="";
 $errors = array();
 
 
-//connect to the database
-//$db = mysqli_connect('192.168.43.21','','',''); // AKRAM K CREDENTIALS
+
+$db = mysqli_connect('192.168.0.111','qadiri','keela1','dcpatient'); // AKRAM K CREDENTIALS
 
 
 if(isset($_POST['patientInsert'])) {
@@ -38,7 +38,7 @@ if(isset($_POST['patientInsert'])) {
   if ($user) { // if Pno exists
     if ($user['FirstName'] === $fn) {
       $price=$user['Price'];
-      $user_check_query = "Delete FROM inventory WHERE Product_ID='$Pno'" ;
+      $user_check_query = "Delete FROM patient WHERE FirstName='$fn'" ;
       $result = mysqli_query($connakram, $user_check_query);
       if($result)
   {
@@ -50,7 +50,7 @@ if(isset($_POST['patientInsert'])) {
             $query = "INSERT INTO patientasyncho(FirstName,LastName,Address,Contact_No) 
                       VALUES('$fn','$ln','$ad','$cn')";
             mysqli_query($connakram, $query);
-            echo "Data inserted in Sales";
+            echo "Data inserted in patient";
 }
 
 }

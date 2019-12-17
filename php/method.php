@@ -21,7 +21,7 @@
             
             <table>
                 <tr>
-                    <td><a href="patient/insert1.php">- Insert</a></td>
+                    <td><a href="patient/insert.php">- Insert</a></td>
                 </tr>
                 <tr>
                     <td><a href="patient/">- Delete</a></td>
