@@ -10,11 +10,11 @@ $cn="";
 $errors = array();
 
 
-//connect to the database. IP address dedena
-//$db = mysqli_connect('192.168.43.94','','','');
+// connect to the database. IP address dedena AKRAM KA
+$db = mysqli_connect('192.168.0.111','qadiri','keela1','dcpatient');
 
-//connect to headquarter database. IP address sahi krdena
-//$dbHQ = mysqli_connect('localhost','root','','dcpatient');
+//connect to headquarter database. IP address sahi krdena . 
+$dbHQ = mysqli_connect('localhost','root','','dcpatient');
 
 if(isset($_POST['patientInsert'])) {
   //recieve all inputted walues from the form
@@ -33,7 +33,7 @@ if (empty($cn)){ array_push($errors, "*Contact is required"); }
    //IF NOT EXIST IN ITS OWN DB  OR HQ DB THEN INSERT IN HQ DB
    if (count($errors) == 0) {
       $query = "INSERT INTO patient(FirstName,LastName,Address,Contact_No) VALUES ('$fn','$ln','$ad','$cn');";
-      $check = mysqli_query($conn1, $query);
+      $check = mysqli_query($dbHQ, $query);
       if($check){
 	   echo "Data inserted in HQ";
 	  }
@@ -46,7 +46,7 @@ if (empty($cn)){ array_push($errors, "*Contact is required"); }
 	// is wale ko uncomment krna
 	if (count($errors) == 0){
       $query = "INSERT INTO patient(FirstName,LastName,Address,Contact_No) VALUES ('$fn','$ln','$ad','$cn');";
-      $check1 = mysqli_query($connakram, $query);
+      $check1 = mysqli_query($db, $query);
 	  if($check1){
 		  echo "Data inserted in Akram's server";
 	  }

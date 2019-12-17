@@ -1,5 +1,6 @@
 <?php
 include("../checkIP.php");
+include("../connection.php");
 //initializing variables
 $fn="";
 $ln="";
@@ -9,15 +10,15 @@ $errors = array();
 
 
 //connect to the database
-$dbHQ = mysqli_connect('localhost','root','','dcpatient');
+$db = mysqli_connect('localhost','root','','dcpatient'); 
 
 
 if(isset($_POST['patientInsert'])) {
     //recieve all inputted walues from the form
-    $fn=mysqli_real_escape_string($dbHQ,$_POST['fn']);
-  	$ln=mysqli_real_escape_string($dbHQ,$_POST['ln']);
-  	$ad=mysqli_real_escape_string($dbHQ,$_POST['ad']);
-  	$cn=mysqli_real_escape_string($dbHQ,$_POST['cn']);
+    $fn=mysqli_real_escape_string($db,$_POST['fn']);
+  	$ln=mysqli_real_escape_string($db,$_POST['ln']);
+  	$ad=mysqli_real_escape_string($db,$_POST['ad']);
+  	$cn=mysqli_real_escape_string($db,$_POST['cn']);
     
 
     // form validation: ensure that the form is correctly filled ...
@@ -36,26 +37,29 @@ echo $_SESSION['fn']; */
 //Finally Insert data if there is no Errors
 
     if (count($errors) == 0) {
-         $query = "INSERT INTO patient(FirstName,LastName,Address,Contact_No) VALUES ('$fn','$ln','$ad','$cn');";	
-      $result = mysqli_query($conn1, $query);
-      if($result){
-		echo "Data inserted oofh";
-	  }
-		else{
-			echo "Acha baat nahi hai";
-		}
-		  
+      $query = "INSERT INTO patient(FirstName,LastName,Address,Contact_No) VALUES ('$fn','$ln','$ad','$cn');";	
+      for($i=0 ; $i<count($connections); $i++){  
+        $result = mysqli_query($connections[$i], $query);
+        if($result){
+          echo "Data inserted oofh";
+          mysqli_close($db);
+	      }
+		    else{
+          echo "Acha baat nahi hai";
+          //mysqli_close($connections[$i]);
+        }
+      }
     } 
 
 
 } //END INSERTION
 
 
-/*
-if(isset($_POST['inventoringSearch'])) {
+
+/*if(isset($_POST['patientSearch'])) {
  
   //recieve all inputted walues from the form
-  $Pno=mysqli_real_escape_string($db,$_POST['pNo']);
+  $Pno=mysqli_real_escape_string($db,$_POST['fn']);
  
   // form validation: ensure that the form is correctly filled ...
   // by adding (array_push()) corresponding error unto $errors array

@@ -1,7 +1,7 @@
 <?php include('IPchecking.php');?>
 <html>
 <head>
-  <title>EasyWalk</title>
+  <title>DC Project</title>
   <link rel="stylesheet" href="CSS/index.css"> 
 </head>
 <body>
@@ -13,7 +13,7 @@
     <div class="Tables">
         <img src="Images/1.jpg" width="520" height=""/>
         <ul class="tabs">
-          <li class="tab"><a href="inventory.php">Patient</a></li>
+          <li class="tab"><a href="method.php">Patient</a></li>
           <li class="tab active"><a href="#contecnt">Doctor</a></li>
         </ul>
           <div id="content">   

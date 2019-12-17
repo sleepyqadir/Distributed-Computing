@@ -2,7 +2,7 @@
 
 <html>
 <head>
-  <title>EasyWalk</title>
+  <title>Patient Health</title>
   <link rel="stylesheet" href="CSS/index.css"> 
 </head>
 <body>

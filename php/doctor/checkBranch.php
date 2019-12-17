@@ -11,34 +11,34 @@ $BRANCH =$_POST['branch'];
     {
        include("server.php");
     }
-    elseif($BRANCH=='Lahore')
+    elseif($BRANCH=='Akram\'s Server')
     {
-        include("server2.php");
+        include("server.php");
     }
-    elseif($BRANCH=='Faisalabad')
+    elseif($BRANCH=='Qadir\'s Server')
     {
     include("server3.php");
     }
 }//END INSERTION
 
 
-if(isset($_POST['inventoringDelete'])){
+if(isset($_POST['doctorDelete'])){
     $BRANCH =$_POST['branch'];
     if($BRANCH=='Karachi')
     {
         include("server.php");
     }
-    elseif($BRANCH=='Lahore')
+    elseif($BRANCH=='Akram\'s Server')
     {
-        include("server2.php");
+        include("server.php");
     }
-    elseif($BRANCH=='Faisalabad')
+    elseif($BRANCH=='Qadir\'s Server')
     {
-        include("server3.php");
+        include("server.php");
     }
 }//END DELETE
 
-if(isset($_POST['inventoringShow'])){
+if(isset($_POST['doctorShow'])){
     $BRANCH ='Karachi';
         include("server.php");
 }//END SHOW

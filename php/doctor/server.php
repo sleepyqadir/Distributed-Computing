@@ -1,5 +1,6 @@
 <?php
 include("../connection.php");
+include("../checkIP.php");
 //initializing variables
 $dfn="";
 $dln="";
@@ -33,15 +34,17 @@ echo $_SESSION['fn']; */
 //Finally Insert data if there is no Errors
 
     if (count($errors) == 0) {
-         $query = "INSERT INTO doctor(FirstName,LastName,contact) VALUES ('$dfn','$dln','$dcn');";	
-      	 $result = mysqli_query($conn1, $query);
+		 $query = "INSERT INTO doctor(FirstName,LastName,contact) VALUES ('$dfn','$dln','$dcn');";	
+		 for($i=0;$i<count($connections);$i++){
+
+      	 $result = mysqli_query($connections[$i], $query);
       	if($result){
 			echo "Data inserted";
 	  	}
 		else{
 			echo "Acha baat nahi hai";
 		}
-		  
+	}
     } 
 
 

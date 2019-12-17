@@ -34,7 +34,6 @@ $user_ip = getUserIP();
 if($user_ip === '::1')
 { 
     include("method.php");
-	//echo "localhost";
 	array_push($connections,$conn1);
 }
 elseif($user_ip === $servername2)
@@ -42,16 +41,19 @@ elseif($user_ip === $servername2)
     echo "<h2>Akram's Server</h2>";
 	array_push($connections,$conn1);
 	array_push($connections,$connakram);
-	/*if($connections[0]->connect_error){
+	if($connections[1]->connect_error){
 		die("Connection failed with branch".$conn1->connect_error);
 	}
 	else{
 		echo "connected with akram server";
-	}*/
+	}
 
 }
-elseif($user_ip === '192.168.43.94')
+elseif($user_ip === $servername3)
 {
-    echo "<h2>Faisalabad</h2>";
+    echo "<h2>Qadir's Server</h2>";
+    array_push($connections,$conn1);
+    array_push($connections,$connqadir);
+    
 }
 ?>

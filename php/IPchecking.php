@@ -36,7 +36,7 @@ elseif($user_ip === '192.168.0.111')
 {
     echo "<h2>Akram's server</h2>";
 }
-elseif($user_ip === '192.168.43.94')
+elseif($user_ip === '192.168.0.110')
 {
-    echo "<h2>Faisalabad</h2>";
+    echo "<h2>Qadir's Server</h2>";
 }
