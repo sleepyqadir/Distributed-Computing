@@ -1,0 +1,20 @@
+{
+  "name": "pc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "abdulqadir",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^3.0.1",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.1.6",
+    "ip": "^1.1.5",
+    "mysql": "^2.17.1",
+    "req-flash": "0.0.3"
+  }
+}

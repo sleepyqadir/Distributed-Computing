@@ -1,0 +1,46 @@
+<div id="wrapper">
+  <%- include ('./partials/sidebar') %>
+  <div id="page-wrapper">
+    <div class="container-fluid">
+      <!-- Page Heading -->
+      <div class="row" id="main">
+        <div class="col-sm-12 col-md-12 well" id="content">
+          <h1>appointments</h1>
+        </div>
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </div>
+  <!-- /#page-wrapper -->
+  <div class="table-wrapper">
+      <% if (appointment.length > 0) {%>
+          <table class="table table-hovered">
+              <thead class="thead-dark">
+                  <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">Patient Name</th>
+                      <th scope="col">Patient Id</th>
+                      <th scope="col">Doctor Id</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <% appointment.forEach((appoint, index) => { %>
+                      <tr>
+                          <th scope="row"><%= appoint.a_id %></th>
+                          <td><%= appoint.p_name %></td>
+                          <td><%= appoint.p_id %></td>
+                          <td><%= appoint.d_id %></td>
+                          <td>
+                              <a href="/editAppointment/<%= patient.d_id %>" target="" rel="noopener" class="btn btn-sm btn-success">Edit</a>
+                              <a href="/deleteAppointment/<%= patient.d_id %>" class="btn btn-sm btn-danger">Delete</a>
+                          </td>
+                      </tr>
+                  <% }) %>
+              </tbody>
+          </table>
+      <% } else { %>
+          <p class="text-center">No Appointment found. Go <a href="/dashboard/Add-appointment" >here</a> to add Appointment.</p>
+      <% } %>
+  </div>
+</div>
