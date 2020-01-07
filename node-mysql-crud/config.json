@@ -1,20 +1,20 @@
 {
     "master" : {
-        "host" : "192.168.0.104",
-        "user" : "qadiri",
-        "password" : "keela1",
-        "database" : "socka"
+        "host" : "127.0.0.1",
+        "user" : "root",
+        "password" : "",
+        "database" : "pc1"
     },
     "shaheer" :{
-        "host" : "192.168.0.106",
-        "user" : "qadirii",
-        "password" :"keela1",
-        "database" : "socka"
+        "host" : "localhost",
+        "user" : "root",
+        "password" :"",
+        "database" : "pc2"
     },
     "qadir" : {
-        "host" : "192.168.0.107",
+        "host" : "localhost",
         "user" : "developer",
         "password" :"js",
-        "database" : "socka"
+        "database" : "pc3"
     }
 }

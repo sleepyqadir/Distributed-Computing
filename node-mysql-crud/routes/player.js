@@ -1,111 +1,111 @@
 const fs = require("fs");
-const ip = require('ip');
+const ip = require("ip");
 const config = require("../config.json");
 const shaheer = config.shaheer;
 const qadir = config.qadir;
 
 module.exports = {
-  getUpdate : (req,res) =>{
+  getUpdate: (req, res) => {
     let query = "INSERT INTO `players`  (SELECT * FROM `players_temp`);"; // query database to get all the players
     let query_temp = "SELECT * FROM `players_temp` ORDER BY id ASC";
     let query_delete = "TRUNCATE `players_temp`";
-    if(ip.address() === "10.0.75.1" ){
-      db.query(query,(err, result)=>{
-        if(err) {
-          res.redirect('/')
+    if (ip.address() === "10.0.75.1") {
+      db.query(query, (err, result) => {
+        if (err) {
+          res.redirect("/");
         }
-        db.query(query_delete,(err,result) =>{
-          if(err){
+        db.query(query_delete, (err, result) => {
+          if (err) {
             console.log(err);
-            res.redirect('/')
+            res.redirect("/");
           }
           console.log(result);
-        })
+        });
         //res.redirect('/')
         console.log(result);
-      })
+      });
     }
-    if(ip.address() === shaheer.host){
-      db2.query(query_temp,(err,result)=>{
-        if(err){
+    if (ip.address() === shaheer.host) {
+      db2.query(query_temp, (err, result) => {
+        if (err) {
           console.log(err);
-          res.redirect('/')
+          res.redirect("/");
         }
         //res.redirect('/');
         result.forEach(value => {
           let query_insert =
-              "INSERT INTO `players` (first_name, last_name, position, number, image, user_name) VALUES ('" +
-              value.first_name +
-              "', '" +
-              value.last_name +
-              "', '" +
-              value.position +
-              "', '" +
-              value.number +
-              "', '" +
-              value.image_name +
-              "', '" +
-              value.user_name +
-              "')";
-              db.query(query_insert,(err,result)=>{
-                if(err){
-                  console.log(err);
-                  res.redirect('/');
-                }
-                console.log(result);
-              })
+            "INSERT INTO `players` (first_name, last_name, position, number, image, user_name) VALUES ('" +
+            value.first_name +
+            "', '" +
+            value.last_name +
+            "', '" +
+            value.position +
+            "', '" +
+            value.number +
+            "', '" +
+            value.image_name +
+            "', '" +
+            value.user_name +
+            "')";
+          db.query(query_insert, (err, result) => {
+            if (err) {
+              console.log(err);
+              res.redirect("/");
+            }
+            console.log(result);
+          });
         });
-        db2.query(query_delete,(err,result) =>{
-          if(err){
+        db2.query(query_delete, (err, result) => {
+          if (err) {
             console.log(err);
-            res.redirect('/')
+            res.redirect("/");
           }
           console.log(result);
-        })
-        res.redirect('/');
+        });
+        res.redirect("/");
         //console.log(result[0].first_name);
-      })
+      });
     }
-    if(ip.address() === qadir.host){
-      db3.query(query_temp,(err,result)=>{
-        if(err){
+    if (ip.address() === qadir.host) {
+      db3.query(query_temp, (err, result) => {
+        if (err) {
           console.log(err);
-          res.redirect('/')
+          res.redirect("/");
         }
         //res.redirect('/');
         result.forEach(value => {
           let query_insert =
-              "INSERT INTO `players` (first_name, last_name, position, number, image, user_name) VALUES ('" +
-              value.first_name +
-              "', '" +
-              value.last_name +
-              "', '" +
-              value.position +
-              "', '" +
-              value.number +
-              "', '" +
-              value.image_name +
-              "', '" +
-              value.user_name +
-              "')";
-              db.query(query_insert,(err,result)=>{
-                if(err){
-                  console.log(err);
-                  res.redirect('/');
-                }
-                console.log(result);
-              })
+            "INSERT INTO `players` (first_name, last_name, position, number, image, user_name) VALUES ('" +
+            value.first_name +
+            "', '" +
+            value.last_name +
+            "', '" +
+            value.position +
+            "', '" +
+            value.number +
+            "', '" +
+            value.image_name +
+            "', '" +
+            value.user_name +
+            "')";
+          db.query(query_insert, (err, result) => {
+            if (err) {
+              console.log(err);
+              res.redirect("/");
+            }
+            console.log(result);
+          });
         });
-        db3.query(query_delete,(err,result) =>{
-          if(err){
+        db3.query(query_delete, (err, result) => {
+          if (err) {
             console.log(err);
-            res.redirect('/')
+            res.redirect("/");
           }
           console.log(result);
-        })
-        res.redirect('/');
+        });
+        res.redirect("/");
         //console.log(result[0].first_name);
-      })
+      });
     }
   },
   addPlayerPage: (req, res) => {
@@ -128,10 +128,9 @@ module.exports = {
     let uploadedFile = req.files.image;
     let image_name = uploadedFile.name;
     let gender = req.body.gender;
-    
+
     let fileExtension = uploadedFile.mimetype.split("/")[1];
     image_name = username + "." + fileExtension;
-
 
     let usernameQuery =
       "SELECT * FROM `players` WHERE user_name = '" + username + "'";
@@ -159,23 +158,23 @@ module.exports = {
               return res.status(500).send(err);
             }
             // send the player's details to the database
-            if(gender == "male"){
+            if (gender == "male") {
               let query =
-              "INSERT INTO `players` (first_name, last_name, position, number, image, user_name) VALUES ('" +
-              first_name +
-              "', '" +
-              last_name +
-              "', '" +
-              position +
-              "', '" +
-              number +
-              "', '" +
-              image_name +
-              "', '" +
-              username +
-              "')";
-            
-              try{
+                "INSERT INTO `players` (first_name, last_name, position, number, image, user_name) VALUES ('" +
+                first_name +
+                "', '" +
+                last_name +
+                "', '" +
+                position +
+                "', '" +
+                number +
+                "', '" +
+                image_name +
+                "', '" +
+                username +
+                "')";
+
+              try {
                 db.query(query, (err, result) => {
                   if (err) {
                     return res.status(500).send(err);
@@ -183,12 +182,10 @@ module.exports = {
                   console.log(result);
                   //res.redirect("/");
                 });
+              } catch (e) {
+                console.log(e);
               }
-              catch(e)
-              {
-                console.log(e)
-              }
-              try{
+              try {
                 db2.query(query, (err, result) => {
                   if (err) {
                     return res.status(500).send(err);
@@ -196,12 +193,10 @@ module.exports = {
                   console.log(result);
                   res.redirect("/");
                 });
+              } catch (e) {
+                console.log(e);
               }
-              catch(e)
-              {
-                console.log(e)
-              }
-              try{
+              try {
                 db3.query(query, (err, result) => {
                   if (err) {
                     return res.status(500).send(err);
@@ -209,29 +204,26 @@ module.exports = {
                   console.log(result);
                   res.redirect("/");
                 });
+              } catch (e) {
+                console.log(e);
               }
-              catch(e)
-              {
-                console.log(e)
-              }
-            }
-            else if(gender == "female"){
+            } else if (gender == "female") {
               let query =
-              "INSERT INTO `players_temp` (first_name, last_name, position, number, image, user_name) VALUES ('" +
-              first_name +
-              "', '" +
-              last_name +
-              "', '" +
-              position +
-              "', '" +
-              number +
-              "', '" +
-              image_name +
-              "', '" +
-              username +
-              "')";
-              if(ip.address() === "10.0.75.1"){
-                try{
+                "INSERT INTO `players_temp` (first_name, last_name, position, number, image, user_name) VALUES ('" +
+                first_name +
+                "', '" +
+                last_name +
+                "', '" +
+                position +
+                "', '" +
+                number +
+                "', '" +
+                image_name +
+                "', '" +
+                username +
+                "')";
+              if (ip.address() === "10.0.75.1") {
+                try {
                   db.query(query, (err, result) => {
                     if (err) {
                       return res.status(500).send(err);
@@ -239,14 +231,11 @@ module.exports = {
                     console.log(result);
                     res.redirect("/");
                   });
+                } catch (e) {
+                  console.log(e);
                 }
-                catch(e)
-                {
-                  console.log(e)
-                }
-              }
-              else if(ip.address() === shaheer.host) {
-                try{
+              } else if (ip.address() === shaheer.host) {
+                try {
                   db2.query(query, (err, result) => {
                     if (err) {
                       return res.status(500).send(err);
@@ -254,14 +243,11 @@ module.exports = {
                     console.log(result);
                     res.redirect("/");
                   });
+                } catch (e) {
+                  console.log(e);
                 }
-                catch(e)
-                {
-                  console.log(e)
-                }
-              }
-              else if(ip.address() === qadir.host) {
-                try{
+              } else if (ip.address() === qadir.host) {
+                try {
                   db3.query(query, (err, result) => {
                     if (err) {
                       return res.status(500).send(err);
@@ -269,15 +255,10 @@ module.exports = {
                     console.log(result);
                     res.redirect("/");
                   });
-                }
-                catch(e)
-                {
-                  console.log(e)
+                } catch (e) {
+                  console.log(e);
                 }
               }
-              
-            
-
             }
           });
         } else {
@@ -305,15 +286,15 @@ module.exports = {
       });
     });
     db2.query(query, (err, result) => {
-        if (err) {
-          return res.status(500).send(err);
-        }
-        res.render("edit-player.ejs", {
-          title: "Edit  Player",
-          player: result[0],
-          message: ""
-        });
+      if (err) {
+        return res.status(500).send(err);
+      }
+      res.render("edit-player.ejs", {
+        title: "Edit  Player",
+        player: result[0],
+        message: ""
       });
+    });
   },
   editPlayer: (req, res) => {
     let playerId = req.params.id;
@@ -321,9 +302,10 @@ module.exports = {
     let last_name = req.body.last_name;
     let position = req.body.position;
     let number = req.body.number;
-
+    var sql =
+      "UPDATE customer SET address = 'Canyon 123' WHERE address = 's545'";
     let query =
-      "UPDATE `players` SET `first_name` = '" +
+      "UPDATE players` SET `first_name` = '" +
       first_name +
       "', `last_name` = '" +
       last_name +
@@ -334,18 +316,18 @@ module.exports = {
       "' WHERE `players`.`id` = '" +
       playerId +
       "'";
-    db.query(query, (err, result) => {
+    db.query(sql, (err, result) => {
       if (err) {
         return res.status(500).send(err);
       }
       res.redirect("/");
     });
     db2.query(query, (err, result) => {
-        if (err) {
-          return res.status(500).send(err);
-        }
-        res.redirect("/");
-      });
+      if (err) {
+        return res.status(500).send(err);
+      }
+      res.redirect("/");
+    });
   },
   deletePlayer: (req, res) => {
     let playerId = req.params.id;
@@ -373,17 +355,17 @@ module.exports = {
       });
     });
     db2.query(getImageQuery, (err, result) => {
+      if (err) {
+        return res.status(500).send(err);
+      }
+      //let image = result[0].image;
+
+      db2.query(deleteUserQuery, (err, result) => {
         if (err) {
           return res.status(500).send(err);
         }
-        //let image = result[0].image;
-  
-    db2.query(deleteUserQuery, (err, result) => {
-          if (err) {
-            return res.status(500).send(err);
-          }
-          res.redirect("/");
-        });
+        res.redirect("/");
       });
+    });
   }
 };

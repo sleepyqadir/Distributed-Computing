@@ -49,18 +49,18 @@ db_shaheer.connect(err =>{
         
     }
 })
-db_qadir.connect(err => {
-  if (err) {
-    console.log(err)
-    console.log("not allowed")
-    console.log(qadir);
+// db_qadir.connect(err => {
+//   if (err) {
+//     console.log(err)
+//     console.log("not allowed")
+//     console.log(qadir);
     
-    // throw err;
-  }
-  else{
-    console.log("connected to ",qadir);
-  }
-});
+//     // throw err;
+//   }
+//   else{
+//     console.log("connected to ",qadir);
+//   }
+// });
 
 
 
@@ -70,6 +70,7 @@ db_qadir.connect(err => {
 global.db = db_master;
 global.db2 = db_shaheer
 global.db3 = db_qadir
+
 // configure middleware
 app.set("port", process.env.port || port); // set express to use this port
 app.set("views", __dirname + "/views"); // set express to look in this folder to render our view
