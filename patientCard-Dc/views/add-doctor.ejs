@@ -26,28 +26,32 @@
                           <input type="text" class="form-control" name="lastname" id="last-name" placeholder="Last Name" required>
                       </div>
                       <div class="form-group col-md-4">
-                          <input type="text" class="form-control" name="specialist" id="specialist" placeholder="specialist" required>
+                          <input type="text" class="form-control" name="d_username" id="d_username" placeholder="User Name" required>
                       </div>
                   </div>
                   <div class="form-row">
-                      <div class="form-group col-md-6">
+                      <div class="form-group col-md-4">
+                          <input type="text" class="form-control" name="specialist" id="specialist" placeholder="specialist" required>
+                      </div>  
+                    <div class="form-group col-md-4">
                           <input type="number" class="form-control" name="contact" id="contact" placeholder="Contact" required>
                       </div>
-                      <div class="form-group col-md-6">
+                      <div class="form-group col-md-4">
                               <input type="text" class="form-control" name="address" id="address" placeholder="Address" required>
-                      </div>    
+                      </div>
                   </div>
-                  <!-- <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                  <label class="btn btn-secondary">
-                      <input type="radio" name="option" id="sync"> sync
-                    </label>
-                    <label class="btn btn-secondary ">
-                      <input type="radio" name="option" id="async" > async
-                    </label>
-                  </div> -->
-                  <!-- <input type="radio" name="gender" value="male"> sync<br> -->
-                  <!-- <input type="radio" name="gender" value="female"> aysnc<br> -->
-                  <button type="submit" class="btn btn-primary float-left">Add Player</button>
+                  <div class="form-row">
+                  <div class="btn-group btn-group-toggle col-md-4">
+                      <input type="radio" name="method" value="sync"> sync<br>
+                      <input type="radio" name="method" value="async"> aysnc<br>
+                  </div>
+                  <div class="btn-group btn-group-toggle col-md-4">
+                      <input type="radio" name="branch" value="Karachi (HQ)">Karachi (HQ)<br>
+                      <input type="radio" name="branch" value="Hyderabad">Hyderabad<br>
+                      <input type="radio" name="branch" value="Silicon Valley">Silicon Valley<br>
+                  </div>
+                </div>
+                  <button type="submit" class="btn btn-primary float-left">Add Doctor</button>
               </form>
           </div>
       </div>

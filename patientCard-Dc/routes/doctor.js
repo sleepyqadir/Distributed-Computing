@@ -31,17 +31,23 @@ module.exports = {
     let specialist = req.body.specialist;
     let contact = req.body.contact;
     let address = req.body.address;
+    let d_username = req.body.d_username;
+    let branch = req.body.branch;
     let query =
-      "INSERT INTO `doctor` (firstname, lastname,specialist,contact,address) VALUES ('" +
+      "INSERT INTO `doctor` (firstname, lastname,d_username,specialist,contact,address,branch) VALUES ('" +
       firstname +
       "', '" +
       lastname +
+      "', '" +
+      d_username +
       "', '" +
       specialist +
       "', '" +
       contact +
       "', '" +
       address +
+      "', '" +
+      branch +
       "')";
     //////////////// sync //////////////////
     if ("sync" === "sync") {
@@ -62,7 +68,8 @@ module.exports = {
   },
   deleteDoctor: (req, res) => {
     let DoctorId = req.params.id;
-    let deleteUserQuery = 'DELETE FROM doctor WHERE contact = "' + DoctorId + '"';
+    let deleteUserQuery =
+      'DELETE FROM doctor WHERE contact = "' + DoctorId + '"';
     //////////////// sync //////////////////
     if ("sync" === "sync") {
       dbs.forEach(db => {

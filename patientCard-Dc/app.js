@@ -21,7 +21,10 @@ const {
 const {
   getAppointmentPage,
   getAddAppointmentPage,
-  addAppointment
+  addAppointment,
+  deleteAppointment,
+  editAppointmentPage,
+  editAppointment
 } = require("./routes/appointment");
 const { getPharmacyPage } = require("./routes/pharmacy");
 const {
@@ -107,8 +110,10 @@ app.get("/dashboard/Add-patients", getAddPatientsPage);
 app.get("/dashboard/Add-doctor", getAddDoctorPage);
 app.get("/deletePatient/:id", deletePatient);
 app.get("/deleteDoctor/:id", deleteDoctor);
+app.get("/deleteAppointment/:id", deleteAppointment);
 app.get("/editPatient/:id", editPatientPage);
 app.get("/editDoctor/:id", editDoctorPage);
+app.get("/editAppointment/:id", editAppointmentPage);
 app.get("/dashboard/Add-appointment", getAddAppointmentPage);
 
 //post
@@ -118,6 +123,7 @@ app.post("/dashboard/Add-appointment", addAppointment);
 app.post("/dashboard/Add-doctor", addDoctor);
 app.post("/editPatient/:id", editPatient);
 app.post("/editDoctor/:id", editDoctor);
+app.post("/editAppointment/:id", editAppointment);
 
 // set the app to listen on the port
 

@@ -20,8 +20,10 @@
                   <tr>
                       <th scope="col">ID</th>
                       <th scope="col">Patient Name</th>
-                      <th scope="col">Patient Id</th>
-                      <th scope="col">Doctor Id</th>
+                      <th scope="col">Patient User Name</th>
+                      <th scope="col">Doctor Name</th>
+                      <th scope="col">Doctor User Name</th>
+                      <th scope="col">Date</th>                      
                   </tr>
               </thead>
               <tbody>
@@ -29,11 +31,13 @@
                       <tr>
                           <th scope="row"><%= appoint.a_id %></th>
                           <td><%= appoint.p_name %></td>
-                          <td><%= appoint.p_id %></td>
-                          <td><%= appoint.d_id %></td>
+                          <td><%= appoint.p_username %></td>
+                          <td><%= appoint.doctor %></td>
+                          <td><%= appoint.d_username %></td>
+                          <td><%= appoint.date %></td>
                           <td>
-                              <a href="/editAppointment/<%= patient.d_id %>" target="" rel="noopener" class="btn btn-sm btn-success">Edit</a>
-                              <a href="/deleteAppointment/<%= patient.d_id %>" class="btn btn-sm btn-danger">Delete</a>
+                              <a href="/editAppointment/<%= appoint.p_username %>" target="" rel="noopener" class="btn btn-sm btn-success">Edit</a>
+                              <a href="/deleteAppointment/<%= appoint.p_username %>" class="btn btn-sm btn-danger">Delete</a>
                           </td>
                       </tr>
                   <% }) %>

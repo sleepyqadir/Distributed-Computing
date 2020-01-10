@@ -26,25 +26,36 @@
                     <input type="text" class="form-control" name="lastname" id="last-name" placeholder="Last Name" required>
                 </div>
                 <div class="form-group col-md-4">
-                    <input type="text" class="form-control" name="gender" id="gender" placeholder="Gender" required>
-                </div>
+                  <input type="text" class="form-control" name="p_username" id="p_username" placeholder="User Name" required>
+              </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <input type="number" class="form-control" name="contact" id="contact" placeholder="Contact" required>
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                         <input type="text" class="form-control" name="address" id="address" placeholder="Address" required>
                 </div>    
-            </div>
+                  <div class="btn-group btn-group-toggle col-md-4">
+                    <input type="radio" name="gender" value="male">Male<br>
+                    <input type="radio" name="gender" value="female">Female<br>
+                  </div>    
+              </div>
             <div class="form-row">            
-            <div class="btn-group btn-group-toggle">
+            <div class="btn-group btn-group-toggle col-md-4">
                 <input type="radio" name="method" value="sync"> sync<br>
                 <input type="radio" name="method" value="async"> aysnc<br>
             </div>
+            <div class="btn-group btn-group-toggle col-md-4">
+              <input type="radio" name="branch" value="Karachi (HQ)">Karachi (HQ)<br>
+              <input type="radio" name="branch" value="Hyderabad">Hyderabad<br>
+              <input type="radio" name="branch" value="Silicon Valley">Silicon Valley<br>
           </div>
-            <button type="submit" class="btn btn-primary float-left">Add Player</button>
-        </form>
+          <div class="form-group col-md-4">           
+            <button type="submit" class="btn btn-primary float-left">Add Patient</button>           
+          </div>
+          </div>
+          </form>
     </div>
 </div>
 </div>

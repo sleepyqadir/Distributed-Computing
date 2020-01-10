@@ -5,7 +5,7 @@
       <!-- Page Heading -->
       <div class="row" id="main">
         <div class="col-sm-12 col-md-12 well" id="content">
-          <h1>doctors</h1>
+          <h1>Appointment</h1>
         </div>
       </div>
       <!-- /.row -->
@@ -15,7 +15,7 @@
   <!-- /#page-wrapper -->
   <% if (message) { %>
   <p class="text-center text-danger"><%= message %></p>
-  <% } %> <% if (doctor) { %>
+  <% } %> <% if (appoint) { %>
   <form
     class="add-patient-form"
     action=""
@@ -27,9 +27,9 @@
         <input
           type="text"
           class="form-control"
-          name="firstname"
-          id="first-name"
-          placeholder="First Name"
+          name="p_username"
+          id="p_username"
+          placeholder="Patient User Name"
           required
         />
       </div>
@@ -37,53 +37,32 @@
         <input
           type="text"
           class="form-control"
-          name="lastname"
-          id="last-name"
-          placeholder="Last Name"
-          required
-        />
-      </div>
-      <div class="form-group col-md-4">
-        <input
-          type="text"
-          class="form-control"
-          name="specialist"
-          id="specialist"
-          placeholder="Specialist"
+          name="d_username"
+          id="d_username"
+          placeholder="Doctor User Name"
           required
         />
       </div>
     </div>
     <div class="form-row">
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-4">
         <input
-          type="number"
+          type="date"
           class="form-control"
-          name="contact"
-          id="contact"
-          placeholder="Contact"
-          required
-        />
-      </div>
-      <div class="form-group col-md-6">
-        <input
-          type="text"
-          class="form-control"
-          name="address"
-          id="address"
-          placeholder="Address"
+          name="date"
+          id="date"
+          placeholder="Date"
           required
         />
       </div>
     </div>
     <button type="submit" class="btn btn-success float-right">
-      Update Player
+      Update Appointment
     </button>
   </form>
   <% } else { %>
   <p class="text-center">
-    doctor Not Found. Go <a href="/dashboard/Add-doctor">here</a> to add
-    doctor.
+    doctor Not Found. Go <a href="/dashboard/Add-doctpr">here</a> to add doctor.
   </p>
   <% } %>
 </div>

@@ -34,21 +34,29 @@ module.exports = {
     console.log(req.files);
     let firstname = req.body.firstname;
     let lastname = req.body.lastname;
+    let p_username = req.body.p_username;
+    let branch = req.body.branch;
+
     let gender = req.body.gender;
     let contact = req.body.contact;
     let address = req.body.address;
+    console.log(branch);
     let method = req.body.method;
     let query =
-      "INSERT INTO `patient` (firstname, lastname,gender,contact,address) VALUES ('" +
+      "INSERT INTO `patient` (firstname, lastname,p_username,gender,contact,address,branch) VALUES ('" +
       firstname +
       "', '" +
       lastname +
+      "', '" +
+      p_username +
       "', '" +
       gender +
       "', '" +
       contact +
       "', '" +
       address +
+      "', '" +
+      branch +
       "')";
     //////////////// sync //////////////////
     if (method === "sync") {
