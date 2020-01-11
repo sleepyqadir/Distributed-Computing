@@ -6,14 +6,12 @@ const ip = require("ip");
 // const system = [master, shaheer, qadir];
 module.exports = {
   getPatientsPage: (req, res) => {
-    console.log(ip.address());
     let query = "SELECT * FROM `patient`"; // query database to get all the players
     db_master.query(query, (err, result) => {
       if (err) {
         console.log(err);
         res.redirect("/dashboard");
       }
-      console.log(result);
       res.render("patients.ejs", {
         title: "patients",
         patients: result
@@ -31,16 +29,13 @@ module.exports = {
       console.log(req.body);
       return res.status(400).send("No files were uploaded.");
     }
-    console.log(req.files);
     let firstname = req.body.firstname;
     let lastname = req.body.lastname;
     let p_username = req.body.p_username;
     let branch = req.body.branch;
-
     let gender = req.body.gender;
     let contact = req.body.contact;
     let address = req.body.address;
-    console.log(branch);
     let method = req.body.method;
     let query =
       "INSERT INTO `patient` (firstname, lastname,p_username,gender,contact,address,branch) VALUES ('" +
@@ -66,7 +61,6 @@ module.exports = {
             if (err) {
               return res.status(500).send(err);
             }
-            console.log(result);
           });
         } catch (e) {
           console.log(e);
@@ -81,7 +75,6 @@ module.exports = {
               if (err) {
                 return res.status(500).send(err);
               }
-              console.log(result);
             });
           } catch (e) {
             console.log(e);
@@ -104,7 +97,6 @@ module.exports = {
           if (err) {
             return res.status(500).send(err);
           }
-          console.log(result);
         });
       });
       res.redirect("/dashboard/patients");
@@ -150,7 +142,6 @@ module.exports = {
           if (err) {
             return res.status(500).send(err);
           }
-          console.log(res);
         });
       });
       res.redirect("/dashboard/patients");

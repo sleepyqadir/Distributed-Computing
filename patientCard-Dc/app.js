@@ -26,7 +26,14 @@ const {
   editAppointmentPage,
   editAppointment
 } = require("./routes/appointment");
-const { getPharmacyPage } = require("./routes/pharmacy");
+const {
+  getPharmacyPage,
+  getAddMedicinesPage,
+  addMedicine,
+  editMedicinePage,
+  editMedicine,
+  deleteMedicine
+} = require("./routes/pharmacy");
 const {
   getDoctorPage,
   getAddDoctorPage,
@@ -35,6 +42,14 @@ const {
   editDoctor,
   editDoctorPage
 } = require("./routes/doctor");
+const {
+  getVendorsPage,
+  getAddVendorsPage,
+  addVendors,
+  deleteVendor,
+  editVendorPage,
+  editVendor
+} = require("./routes/vendors");
 const { getDashboardPage } = require("./routes/dashboard");
 const { getLoginPage, getLoginAccess } = require("./routes/login");
 
@@ -106,24 +121,35 @@ app.get("/dashboard/pharmacy", getPharmacyPage);
 app.get("/dashboard/doctor", getDoctorPage);
 app.get("/dashboard/appointment", getAppointmentPage);
 app.get("/dashboard/patients", getPatientsPage);
+app.get("/dashboard/vendors", getVendorsPage);
 app.get("/dashboard/Add-patients", getAddPatientsPage);
+app.get("/dashboard/Add-vendors", getAddVendorsPage);
+app.get("/dashboard/Add-medicines", getAddMedicinesPage);
 app.get("/dashboard/Add-doctor", getAddDoctorPage);
 app.get("/deletePatient/:id", deletePatient);
 app.get("/deleteDoctor/:id", deleteDoctor);
+app.get("/deleteVendor/:id", deleteVendor);
+app.get("/deleteMedicine/:id", deleteMedicine);
 app.get("/deleteAppointment/:id", deleteAppointment);
 app.get("/editPatient/:id", editPatientPage);
 app.get("/editDoctor/:id", editDoctorPage);
+app.get("/editVendor/:id", editVendorPage);
+app.get("/editMedicine/:id", editMedicinePage);
 app.get("/editAppointment/:id", editAppointmentPage);
 app.get("/dashboard/Add-appointment", getAddAppointmentPage);
 
 //post
 app.post("/login", getLoginAccess);
 app.post("/dashboard/Add-patients", addPatient);
+app.post("/dashboard/Add-vendors", addVendors);
 app.post("/dashboard/Add-appointment", addAppointment);
 app.post("/dashboard/Add-doctor", addDoctor);
+app.post("/dashboard/Add-medicines", addMedicine);
 app.post("/editPatient/:id", editPatient);
+app.post("/editVendor/:id", editVendor);
 app.post("/editDoctor/:id", editDoctor);
 app.post("/editAppointment/:id", editAppointment);
+app.post("/editMedicine/:id", editMedicine);
 
 // set the app to listen on the port
 

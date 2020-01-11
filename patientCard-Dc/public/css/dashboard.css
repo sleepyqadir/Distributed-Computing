@@ -61,7 +61,7 @@
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   background-color: #fff;
-  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  -webkit-box-shadow: 0 6px 12px rgb(0, 0, 0);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
 }
 
@@ -90,7 +90,7 @@
 
   .side-nav > li > a {
     width: 225px;
-    height: 100px;
+    height: 14vh;
     border-bottom: 1px rgba(0, 0, 0, 0.3) solid;
     font-size: 24px;
   }

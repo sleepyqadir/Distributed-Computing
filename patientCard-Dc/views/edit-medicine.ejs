@@ -1,0 +1,71 @@
+<div id="wrapper">
+    <%- include ('./partials/sidebar') %>
+    <div id="page-wrapper">
+      <div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="row" id="main">
+          <div class="col-sm-12 col-md-12 well" id="content">
+            <h1>Medicines</h1>
+          </div>
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </div>
+    <!-- /#page-wrapper -->
+    <% if (message) { %>
+    <p class="text-center text-danger"><%= message %></p>
+    <% } %> <% if (medicine) { %>
+    <form
+      class="edit-medicine-form"
+      action=""
+      method="post"
+      enctype="multipart/form-data"
+    >
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <input
+            type="text"
+            class="form-control"
+            name="m_name"
+            id="m_name"
+            placeholder="Medicine Name"
+            required
+          />
+        </div>
+        <div class="form-group col-md-4">
+            <input
+              type="text"
+              class="form-control"
+              name="v_username"
+              id="v_username"
+              placeholder="Vendor User Name"
+              required
+            />
+          </div>
+        <div class="form-group col-md-4"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <input
+            type="number"
+            class="form-control"
+            name="quantity"
+            id="quantity"
+            placeholder="Quantity"
+            required
+          />
+        </div>
+      </div>
+      <button type="submit" class="btn btn-success float-right">
+        Update Medicine
+      </button>
+    </form>
+    <% } else { %>
+    <p class="text-center">
+      Medicine Not Found. Go <a href="/dashboard/Add-medicines">here</a> to add
+      medicines.
+    </p>
+    <% } %>
+  </div>
+  

@@ -1,0 +1,52 @@
+<div id="wrapper">
+    <%- include ('./partials/sidebar') %>
+    <div id="page-wrapper">
+      <div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="row" id="main">
+          <div class="col-sm-12 col-md-12 well" id="content">
+            <h1>medicines</h1>
+          </div>
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </div>
+    <!-- /#page-wrapper -->
+    <div>
+          <% if (message != '') { %>
+              <p class="text-center text-danger"><%= message %></p>
+          <% } %>
+          <form class="add-medicines-form" action="" method="post" enctype="multipart/form-data">
+              <div class="form-row">
+                  <div class="form-group col-md-4">
+                      <input type="text" class="form-control" name="m_name" id="m_name" placeholder="Medicine Name" required>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <input type="text" class="form-control" name="v_username" id="v_username" placeholder="Vendor User Name" required>
+                </div>
+              </div>
+              <div class="form-row">
+                  <div class="form-group col-md-4">
+                      <input type="number" class="form-control" name="quantity" id="quantity" placeholder="Quantity" required>
+                  </div>      
+                </div>
+              <div class="form-row">            
+              <div class="btn-group btn-group-toggle col-md-4">
+                  <input type="radio" name="method" value="sync"> sync<br>
+                  <input type="radio" name="method" value="async"> aysnc<br>
+              </div>
+              <div class="btn-group btn-group-toggle col-md-4">
+                <input type="radio" name="branch" value="Karachi (HQ)">Karachi (HQ)<br>
+                <input type="radio" name="branch" value="Hyderabad">Hyderabad<br>
+                <input type="radio" name="branch" value="Silicon Valley">Silicon Valley<br>
+            </div>
+            <div class="form-group col-md-4">           
+              <button type="submit" class="btn btn-primary float-left">Add Medicine</button>           
+            </div>
+            </div>
+            </form>
+      </div>
+  </div>
+  </div>
+  

@@ -1,41 +1,44 @@
 module.exports = {
-  getPharmacyPage: (req, res) => {
-    let query = "SELECT * FROM `medicine`"; // query database to get all the players
+  getVendorsPage: (req, res) => {
+    let query = "SELECT * FROM `vendor`"; // query database to get all the players
     db_master.query(query, (err, result) => {
       if (err) {
         console.log(err);
         res.redirect("/dashboard");
       }
-      res.render("pharmacy.ejs", {
+      res.render("vendors.ejs", {
         title: "welcome to patientCard",
         message: "",
-        medicines: result
+        vendors: result
       });
     });
   },
-  getAddMedicinesPage: (req, res) => {
-    res.render("add-medicines.ejs", {
+  getAddVendorsPage: (req, res) => {
+    res.render("add-vendors.ejs", {
       title: "welcome to patientCard",
       message: ""
     });
   },
-  addMedicine: (req, res) => {
+  addVendors: (req, res) => {
     if (!req.body) {
       console.log(req.body);
       return res.status(400).send("No files were uploaded.");
     }
-    let m_name = req.body.m_name;
+    let firstname = req.body.firstname;
+    let lastname = req.body.lastname;
     let v_username = req.body.v_username;
     let branch = req.body.branch;
-    let quantity = req.body.quantity;
+    let contact = req.body.contact;
     let method = req.body.method;
     let query =
-      "INSERT INTO `medicine` (v_username,m_name,quantity,branch) VALUES ('" +
+      "INSERT INTO `vendor` (firstname, lastname,contact,v_username,branch) VALUES ('" +
+      firstname +
+      "', '" +
+      lastname +
+      "', '" +
+      contact +
+      "', '" +
       v_username +
-      "', '" +
-      m_name +
-      "', '" +
-      quantity +
       "', '" +
       branch +
       "')";
@@ -52,7 +55,7 @@ module.exports = {
           console.log(e);
         }
       });
-      res.redirect("/dashboard/pharmacy");
+      res.redirect("/dashboard/vendors");
     } else if (method === "async") {
       dbs.forEach(db => {
         if (ip.address() == "10.57.11.228") {
@@ -67,15 +70,15 @@ module.exports = {
           }
         }
       });
-      res.redirect("/dashboard/pharmacy");
+      res.redirect("/dashboard/vendors");
     } else {
-      res.redirect("/dashboard/pharmacy");
+      res.redirect("/dashboard/vendors");
     }
   },
-  deleteMedicine: (req, res) => {
+  deleteVendor: (req, res) => {
     let v_username = req.params.id;
     let deleteUserQuery =
-      'DELETE FROM medicine WHERE v_username = "' + v_username + '"';
+      'DELETE FROM vendor WHERE v_username = "' + v_username + '"';
     //////////////// sync //////////////////
     if ("sync" === "sync") {
       dbs.forEach(db => {
@@ -85,50 +88,49 @@ module.exports = {
           }
         });
       });
-      res.redirect("/dashboard/pharmacy");
+      res.redirect("/dashboard/vendors");
     }
   },
-  editMedicinePage: (req, res) => {
+  editVendorPage: (req, res) => {
     let v_username = req.params.id;
-    let query =
-      "SELECT * FROM `medicine` WHERE v_username = '" + v_username + "' ";
+    let query = "SELECT * FROM `vendor` WHERE v_username = '" + v_username + "' ";
     db_master.query(query, (err, result) => {
       if (err) {
         return res.status(500).send(err);
       }
-      res.render("edit-medicine.ejs", {
+      res.render("edit-vendor.ejs", {
         title: "Edit  Vendor",
-        medicine: result[0],
+        vendor: result[0],
         message: ""
       });
     });
   },
-  editMedicine: (req, res) => {
-    let vendorId = req.params.id;
-    let m_name = req.body.m_name;
-    let v_username = req.body.v_username;
-    let quantity = req.body.quantity;
+  editVendor: (req, res) => {
+    let v_username = req.params.id;
+    let firstname = req.body.firstname;
+    let lastname = req.body.lastname;
+    let contact = req.body.contact;
+    console.log(lastname);
     let query =
-      "UPDATE `medicine` SET `m_name` = '" +
-      m_name +
-      "', `quantity` = '" +
-      quantity +
-      "', `v_username` = '" +
+      "UPDATE `vendor` SET `firstname` = '" +
+      firstname +
+      "', `lastname` = '" +
+      lastname +
+      "', `contact` = '" +
+      contact +
+      "' WHERE `vendor`.`v_username` = '" +
       v_username +
-      "' WHERE `medicine`.`v_username` = '" +
-      vendorId +
       "'";
     //////////////// sync //////////////////
     if ("sync" === "sync") {
       dbs.forEach(db => {
         db.query(query, (err, result) => {
           if (err) {
-            console.log(err)
             return res.status(500).send(err);
           }
         });
       });
-      res.redirect("/dashboard/pharmacy");
+      res.redirect("/dashboard/vendors");
     }
   }
 };

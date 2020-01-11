@@ -100,3 +100,27 @@ REFERENCES patient(p_username);
 ALTER TABLE appointment
 ADD CONSTRAINT appointment_fk_2 FOREIGN KEY (d_username) 
 REFERENCES doctor(d_username);
+
+
+/// medicine
+
+ALTER TABLE medicine 
+DROP FOREIGN KEY medicine_ibfk_1;
+
+ALTER TABLE medicine 
+DROP COLUMN v_id;
+
+ALTER TABLE vendor
+ADD COLUMN v_username VARCHAR(30) NOT NULL UNIQUE;
+
+ALTER TABLE medicine
+ADD COLUMN v_username VARCHAR(30) NOT NULL AFTER m_id;
+
+ALTER TABLE medicine 
+ADD CONSTRAINT medicine_fk_1 FOREIGN KEY(v_username)
+REFERENCES vendor(v_username);
+
+ALTER TABLE medicine
+ADD COLUMN branch VARCHAR(15) NOT NULL;
+ALTER TABLE vendor
+ADD COLUMN branch VARCHAR(15) NOT NULL;
