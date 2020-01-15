@@ -37,6 +37,7 @@ module.exports = {
     let contact = req.body.contact;
     let address = req.body.address;
     let method = req.body.method;
+    console.log(method)
     let query =
       "INSERT INTO `patient` (firstname, lastname,p_username,gender,contact,address,branch) VALUES ('" +
       firstname +

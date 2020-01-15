@@ -4,14 +4,24 @@
     <div class="container-fluid">
       <!-- Page Heading -->
       <div class="row" id="main">
-        <div class="col-sm-12 col-md-12 well" id="content">
-          <h1>patients</h1>
-          <a
-            class="float-right"
-            href="/dashboard/Add-patients"
-            title="Add a New Player"
-            >Add a Patient</a
-          >
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-default outer">
+              <div class="panel-heading headerbar">
+                <h2 class="text-center">Patients</h2>
+              </div>
+              <div class="panel-body text-justify">
+                <a href="/dashboard/Add-patients" title="Add a New Player">
+                  <button
+                    type="button"
+                    class="btn btn-primary btn-lg btn-block"
+                  >
+                    Add a Patient
+                  </button></a
+                >
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <!-- /.row -->
@@ -19,55 +29,61 @@
     <!-- /.container-fluid -->
   </div>
   <!-- /#page-wrapper -->
-  <div class="table-wrapper">
-    <% if (patients.length > 0) {%>
-    <table class="table table-hovered">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">ID</th>
-          <th scope="col">First Name</th>
-          <th scope="col">Last Name</th>
-          <th scope="col">User Name</th>
-          <th scope="col">Gender</th>
-          <th scope="col">Contact</th>
-          <th scope="col">Address</th>
-          <th scope="col">Branch</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% patients.forEach((patient, index) => { %>
-        <tr>
-          <th scope="row"><%= patient.p_id %></th>
-          <td><%= patient.firstname %></td>
-          <td><%= patient.lastname %></td>
-          <td><%= patient.p_username %></td>
-          <td><%= patient.gender %></td>
-          <td><%= patient.contact %></td>
-          <td><%= patient.address %></td>
-          <td><%= patient.branch %></td>
-          <td>
-            <a
-              href="/editPatient/<%= patient.contact %>"
-              target=""
-              rel="noopener"
-              class="btn btn-sm btn-success"
-              >Edit</a
-            >
-            <a
-              href="/deletePatient/<%= patient.contact %>"
-              class="btn btn-sm btn-danger"
-              >Delete</a
-            >
-          </td>
-        </tr>
-        <% }) %>
-      </tbody>
-    </table>
-    <% } else { %>
-    <p class="text-center">
-      No patients found. Go <a href="/dashboard/Add-patients">here</a> to add
-      patients.
-    </p>
-    <% } %>
+  <div class="table-wrapper"></div>
+  <% if (patients.length > 0){%>
+  <div class="row">
+    <% patients.forEach((patient, index) => { %>
+    <div class="col-md-4">
+      <div class="center">
+        <div class="profile">
+          <div class="image">
+            <div class="circle-1"></div>
+            <div class="circle-2"></div>
+            <img
+              src="data:image/jpeg;base64,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"
+              width="70"
+              height="70"
+              alt="Jessica Potter"
+            />
+          </div>
+
+          <div class="name">
+            <span> <%= patient.firstname %></span>
+            <span><%= patient.lastname %></span>
+          </div>
+          <div class="job"><%= patient.p_username %></div>
+          <div class="job"><%= patient.gender %></div>
+          <div class="actions">
+            <button class="btn">
+              <a class="ref" href="/editPatient/<%= patient.contact %>">Edit</a>
+            </button>
+            <button class="btn">
+              <a class="ref" href="/deletePatient/<%= patient.contact %>"
+                >Delete</a
+              >
+            </button>
+          </div>
+        </div>
+
+        <div class="stats">
+          <div class="box">
+            <span class="value"><%= patient.contact %></span>
+          </div>
+          <div class="box">
+            <span class="value"><%= patient.address %></span>
+          </div>
+          <div class="box">
+            <span class="value"><%= patient.branch %></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% }) %>
   </div>
+  <% } else { %>
+  <p class="text-center">
+    No patients found. Go <a href="/dashboard/Add-patients">here</a> to add
+    patients.
+  </p>
+  <% } %>
 </div>
