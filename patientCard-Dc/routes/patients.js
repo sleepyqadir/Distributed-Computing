@@ -1,9 +1,9 @@
 const ip = require("ip");
-// const config = require("../config.json");
-// const master = config.master;
-// const shaheer = config.shaheer;
-// const qadir = config.qadir;
-// const system = [master, shaheer, qadir];
+const config = require("../config.json");
+const master = config.master;
+const shaheer = config.shaheer;
+const qadir = config.qadir;
+const system = [master, shaheer, qadir];
 module.exports = {
   getPatientsPage: (req, res) => {
     let query = "SELECT * FROM `patient`"; // query database to get all the players
@@ -54,6 +54,23 @@ module.exports = {
       "', '" +
       branch +
       "')";
+
+      let query =
+      "INSERT INTO `patient_temp` (firstname, lastname,p_username,gender,contact,address,branch) VALUES ('" +
+      firstname +
+      "', '" +
+      lastname +
+      "', '" +
+      p_username +
+      "', '" +
+      gender +
+      "', '" +
+      contact +
+      "', '" +
+      address +
+      "', '" +
+      branch +
+      "')";
     //////////////// sync //////////////////
     if (method === "sync") {
       dbs.forEach(db => {
@@ -69,14 +86,29 @@ module.exports = {
       });
       res.redirect("/dashboard/patients");
     } else if (method === "async") {
-      try {
-        db_temp.query(query, (err, result) => {
-          if (err) {
-            return res.status(500).send(err);
-          }
-        });
-      } catch (e) {
-        console.log(e);
+      if(ip.address() === master.host)
+      {
+        try {
+          db_master.query(query, (err, result) => {
+            if (err) {
+              return res.status(500).send(err);
+            }
+          });
+        } catch (e) {
+          console.log(e);
+        }
+      }
+      else if (ip.address() === shaheer.host)
+      {
+        try {
+          db_shaheer.query(query, (err, result) => {
+            if (err) {
+              return res.status(500).send(err);
+            }
+          });
+        } catch (e) {
+          console.log(e);
+        }
       }
       res.redirect("/dashboard/patients");
     } else {

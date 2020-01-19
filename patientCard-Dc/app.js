@@ -60,10 +60,10 @@ const shaheer = config.shaheer;
 const configs_array = [master,shaheer]
 
 const temp = configs_array.filter(db => db.host === ip.address()) 
-
+console.log(temp[0].db,"xxxxxxxxxxxxxxxxxxxxx")
 
 // configure middleware
-
+  
 app.set("port", process.env.port || port); // set express to use this port
 app.set("views", __dirname + "/views"); // set express to look in this folder to render our view
 app.set("view engine", "ejs"); // configure template engine
