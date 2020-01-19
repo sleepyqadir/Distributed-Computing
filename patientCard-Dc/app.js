@@ -57,6 +57,10 @@ const config = require("./config.json");
 const master = config.master;
 const shaheer = config.shaheer;
 // const qadir = config.qadir;
+const configs_array = [master,shaheer]
+
+const temp = configs_array.filter(db => db.host === ip.address()) 
+
 
 // configure middleware
 
@@ -74,6 +78,11 @@ const db_master = mysql.createConnection(master);
 const db_shaheer = mysql.createConnection(shaheer);
 // const db_qadir = mysql.createConnection(qadir);
 
+
+// temp db //////////////////
+
+
+
 // connect
 db_master.connect(err => {
   if (err) {
@@ -85,6 +94,7 @@ db_master.connect(err => {
     console.log("connected to ", master);
   }
 });
+
 
 db_shaheer.connect(err => {
   if (err) {
@@ -107,17 +117,7 @@ db_shaheer.connect(err => {
 //   }
 // });
 
-// temp db //////////////////
-
-
-temp = [master,shaheer]
-console.log(temp,"xxxxxxxxxxxxxxxxx")
-
-const db_temp = temp.filter(db => db.host === ip.address()) 
-
-console.log(db_temp[0].db,"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
-
-global.db_temp = db_temp[0].db
+global.db_temp =  temp[0].db === "db_shaheer" ? db_shaheer : db_master
 global.db_master = db_master;
 global.db_shaheer = db_shaheer;
 // global.db_qadir = db_qadir;
