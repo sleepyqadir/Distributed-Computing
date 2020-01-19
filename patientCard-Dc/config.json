@@ -7,7 +7,7 @@
         "db" : "db_master"
     },
     "shaheer" :{
-        "host" : "192.168.0.120", 
+        "host" : "192.168.1.120", 
         "user" : "patient_card",
         "password" :"pc123456",
         "database" : "patientcard",

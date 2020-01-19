@@ -7,15 +7,22 @@ const system = [master, shaheer, qadir];
 module.exports = {
   getPatientsPage: (req, res) => {
     let query = "SELECT * FROM `patient`"; // query database to get all the players
+    let query_temp = "SELECT * FROM `patient_temp`"; // query database to get all the players
     db_master.query(query, (err, result) => {
+      if (err) {
+        console.log(err);
+        res.redirect("/dashboard");
+      }
+    db_temp.query(query_temp,(err,result_temp)=>{
       if (err) {
         console.log(err);
         res.redirect("/dashboard");
       }
       res.render("patients.ejs", {
         title: "patients",
-        patients: result
+        patients: [...result,...result_temp]
       });
+    })
     });
   },
   getAddPatientsPage: (req, res) => {
@@ -86,10 +93,8 @@ module.exports = {
       });
       res.redirect("/dashboard/patients");
     } else if (method === "async") {
-      if(ip.address() === master.host)
-      {
         try {
-          db_master.query(query_temp, (err, result) => {
+          db_temp.query(query_temp, (err, result) => {
             if (err) {
               return res.status(500).send(err);
             }
@@ -97,19 +102,6 @@ module.exports = {
         } catch (e) {
           console.log(e);
         }
-      }
-      else if (ip.address() === shaheer.host)
-      {
-        try {
-          db_shaheer.query(query_temp, (err, result) => {
-            if (err) {
-              return res.status(500).send(err);
-            }
-          });
-        } catch (e) {
-          console.log(e);
-        }
-      }
       res.redirect("/dashboard/patients");
     } else {
       res.redirect("/dashboard/patients");
