@@ -106,7 +106,19 @@ db_shaheer.connect(err => {
 //     console.log("connected to ", qadir);
 //   }
 // });
-console.log(ip.address())
+
+// temp db //////////////////
+
+
+temp = [master,shaheer]
+console.log(temp,"xxxxxxxxxxxxxxxxx")
+
+const db_temp = temp.filter(db => db.host === ip.address()) 
+
+console.log(db_temp,"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+
+
+
 global.db_master = db_master;
 global.db_shaheer = db_shaheer;
 // global.db_qadir = db_qadir;

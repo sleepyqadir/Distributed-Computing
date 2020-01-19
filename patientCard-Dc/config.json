@@ -3,18 +3,21 @@
         "host" : "127.0.0.1",
         "user" : "patient_card",
         "password" : "pc123456",
-        "database" : "patientCard"
+        "database" : "patientCard",
+        "db" : "db_master"
     },
     "shaheer" :{
         "host" : "",
         "user" : "patient_card",
         "password" :"pc123456",
-        "database" : "patientCard"
+        "database" : "patientCard",
+        "db" : "db_shaheer"
     },
     "qadir" : {
         "host" : "",
         "user" : "patient_card",
         "password" :"pc123456",
-        "database" : "patientCard"
+        "database" : "patientCard",
+        "db" : "db_qadir"
     }
 }
