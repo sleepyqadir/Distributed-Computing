@@ -55,7 +55,7 @@ module.exports = {
       branch +
       "')";
 
-      let query =
+      let query_temp =
       "INSERT INTO `patient_temp` (firstname, lastname,p_username,gender,contact,address,branch) VALUES ('" +
       firstname +
       "', '" +
@@ -89,7 +89,7 @@ module.exports = {
       if(ip.address() === master.host)
       {
         try {
-          db_master.query(query, (err, result) => {
+          db_master.query(query_temp, (err, result) => {
             if (err) {
               return res.status(500).send(err);
             }
@@ -101,7 +101,7 @@ module.exports = {
       else if (ip.address() === shaheer.host)
       {
         try {
-          db_shaheer.query(query, (err, result) => {
+          db_shaheer.query(query_temp, (err, result) => {
             if (err) {
               return res.status(500).send(err);
             }
