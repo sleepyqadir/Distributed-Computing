@@ -1,3 +1,6 @@
+CREATE DATABASE PatientCard;
+GRANT ALL PRIVILEGES ON *.* TO 'patient_card'@'localhost' IDENTIFIED BY 'pc123456';
+
 CREATE TABLE patient(
     p_id INT AUTO_INCREMENT PRIMARY KEY,
     firstname VARCHAR(30) NOT NULL,

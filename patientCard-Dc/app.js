@@ -1,10 +1,10 @@
 const express = require("express");
 const fileUpload = require("express-fileupload");
 const bodyParser = require("body-parser");
-const mysql = require("mysql");
+const mysql = require("mysql2");
 const path = require("path");
 const app = express();
-
+const ip = require("ip")
 // constants
 
 const port = 5000;
@@ -80,7 +80,6 @@ db_master.connect(err => {
     console.log(err);
     console.log("not allowed");
     console.log(master);
-
     // throw err;
   } else {
     console.log("connected to ", master);
@@ -107,7 +106,7 @@ db_shaheer.connect(err => {
 //     console.log("connected to ", qadir);
 //   }
 // });
-
+console.log(ip.address())
 global.db_master = db_master;
 global.db_shaheer = db_shaheer;
 // global.db_qadir = db_qadir;
