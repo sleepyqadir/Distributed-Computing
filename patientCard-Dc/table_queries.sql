@@ -59,6 +59,7 @@ DROP COLUMN p_id;
 ALTER TABLE appointment
 DROP COLUMN d_id;
 
+
 ALTER TABLE patient
 ADD COLUMN p_username VARCHAR(15) NOT NULL after lastname;
 

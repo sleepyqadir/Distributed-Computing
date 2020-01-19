@@ -69,19 +69,15 @@ module.exports = {
       });
       res.redirect("/dashboard/patients");
     } else if (method === "async") {
-      dbs.forEach(db => {
-        if (ip.address() == "10.57.11.228") {
-          try {
-            db.query(query, (err, result) => {
-              if (err) {
-                return res.status(500).send(err);
-              }
-            });
-          } catch (e) {
-            console.log(e);
+      try {
+        db_temp.query(query, (err, result) => {
+          if (err) {
+            return res.status(500).send(err);
           }
-        }
-      });
+        });
+      } catch (e) {
+        console.log(e);
+      }
       res.redirect("/dashboard/patients");
     } else {
       res.redirect("/dashboard/patients");

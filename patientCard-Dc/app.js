@@ -115,10 +115,9 @@ console.log(temp,"xxxxxxxxxxxxxxxxx")
 
 const db_temp = temp.filter(db => db.host === ip.address()) 
 
-console.log(db_temp,"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+console.log(db_temp[0].db,"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
 
-
-
+global.db_temp = db_temp[0].db
 global.db_master = db_master;
 global.db_shaheer = db_shaheer;
 // global.db_qadir = db_qadir;
