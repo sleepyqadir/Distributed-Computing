@@ -51,7 +51,7 @@ module.exports = {
   updateDoctorMaster: (req, res) => {
     let query = "SELECT * FROM `doctor_temp`"; // query database to get all the players
     let query_delete = "TRUNCATE `doctor_temp`";
-    db_temp.query(query, (err, result) => {
+      db_temp.query(query, (err, result) => {
       if (err) {
         console.log(err);
         res.redirect("/dashboard/doctor");
@@ -59,19 +59,19 @@ module.exports = {
       result.forEach(element => {
         let query =
           "INSERT INTO `doctor` (firstname, lastname,d_username,specialist,contact,address,branch) VALUES ('" +
-          firstname +
+          element.firstname +
           "', '" +
-          lastname +
+          element.lastname +
           "', '" +
-          d_username +
+          element.d_username +
           "', '" +
-          specialist +
+          element.specialist +
           "', '" +
-          contact +
+          element.contact +
           "', '" +
-          address +
+          element.address +
           "', '" +
-          branch +
+          element.branch +
           "')";
         try {
           db_master.query(query, (err, result) => {
@@ -106,15 +106,15 @@ module.exports = {
       result.forEach(element => {
         let query =
           "INSERT INTO `appointment` (p_name,p_username,doctor,d_username,date) VALUES ('" +
-          patient[0].firstname +
+          element.firstname +
           "', '" +
-          p_username +
+          element.p_username +
           "', '" +
-          doctor[0].firstname +
+          element.firstname +
           "', '" +
-          d_username +
+          element.d_username +
           "', '" +
-          date +
+          element.date +
           "')";
         try {
           db_master.query(query, (err, result) => {
@@ -149,13 +149,13 @@ module.exports = {
       result.forEach(element => {
         let query =
           "INSERT INTO `medicine` (v_username,m_name,quantity,branch) VALUES ('" +
-          v_username +
+          element.v_username +
           "', '" +
-          m_name +
+          element.m_name +
           "', '" +
-          quantity +
+          element.quantity +
           "', '" +
-          branch +
+          element.branch +
           "')";
         try {
           db_master.query(query, (err, result) => {
@@ -190,15 +190,15 @@ module.exports = {
       result.forEach(element => {
         let query =
           "INSERT INTO `vendor` (firstname, lastname,contact,v_username,branch) VALUES ('" +
-          firstname +
+          element.firstname +
           "', '" +
-          lastname +
+          element.lastname +
           "', '" +
-          contact +
+          element.contact +
           "', '" +
-          v_username +
+          element.v_username +
           "', '" +
-          branch +
+          element.branch +
           "')";
         try {
           db_master.query(query, (err, result) => {
