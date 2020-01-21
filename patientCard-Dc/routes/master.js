@@ -74,7 +74,7 @@ module.exports = {
           branch +
           "')";
         try {
-          db_master.query(query_insert, (err, result) => {
+          db_master.query(query, (err, result) => {
             if (err) {
               return res.status(500).send(err);
             }
@@ -117,7 +117,7 @@ module.exports = {
           date +
           "')";
         try {
-          db_master.query(query_insert, (err, result) => {
+          db_master.query(query, (err, result) => {
             if (err) {
               return res.status(500).send(err);
             }
@@ -158,7 +158,7 @@ module.exports = {
           branch +
           "')";
         try {
-          db_master.query(query_insert, (err, result) => {
+          db_master.query(query, (err, result) => {
             if (err) {
               return res.status(500).send(err);
             }
@@ -201,7 +201,7 @@ module.exports = {
           branch +
           "')";
         try {
-          db_master.query(query_insert, (err, result) => {
+          db_master.query(query, (err, result) => {
             if (err) {
               return res.status(500).send(err);
             }
