@@ -39,6 +39,17 @@ module.exports = {
       "', '" +
       branch +
       "')";
+
+      let query_temp =
+      "INSERT INTO `medicine_temp` (v_username,m_name,quantity,branch) VALUES ('" +
+      v_username +
+      "', '" +
+      m_name +
+      "', '" +
+      quantity +
+      "', '" +
+      branch +
+      "')";
     //////////////// sync //////////////////
     if (method === "sync") {
       dbs.forEach(db => {
@@ -54,20 +65,16 @@ module.exports = {
       });
       res.redirect("/dashboard/pharmacy");
     } else if (method === "async") {
-      dbs.forEach(db => {
-        if (ip.address() == "10.57.11.228") {
-          try {
-            db.query(query, (err, result) => {
-              if (err) {
-                return res.status(500).send(err);
-              }
-            });
-          } catch (e) {
-            console.log(e);
+      try {
+        db_temp.query(query_temp, (err, result) => {
+          if (err) {
+            return res.status(500).send(err);
           }
-        }
-      });
-      res.redirect("/dashboard/pharmacy");
+        });
+      } catch (e) {
+        console.log(e);
+      }
+    res.redirect("/dashboard/pharmacy");
     } else {
       res.redirect("/dashboard/pharmacy");
     }

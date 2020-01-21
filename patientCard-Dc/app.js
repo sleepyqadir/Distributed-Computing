@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const mysql = require("mysql2");
 const path = require("path");
 const app = express();
-const ip = require("ip")
+const ip = require("ip");
 // constants
 
 const port = 5000;
@@ -50,20 +50,26 @@ const {
   editVendorPage,
   editVendor
 } = require("./routes/vendors");
+const {
+  updatePatientMaster,
+  updateDoctorMaster,
+  updateAppointmentMaster,
+  updatePharmacyMaster,
+  updateVendorMaster
+} = require("./routes/master");
 const { getDashboardPage } = require("./routes/dashboard");
 const { getLoginPage, getLoginAccess } = require("./routes/login");
 
 const config = require("./config.json");
 const master = config.master;
 const shaheer = config.shaheer;
-// const qadir = config.qadir;
-const configs_array = [master,shaheer]
+const qadir = config.qadir;
+const configs_array = [master, shaheer,qadir];
 
-const temp = configs_array.filter(db => db.host === ip.address()) 
-console.log(temp[0].db,"xxxxxxxxxxxxxxxxxxxxx")
+const temp = configs_array.filter(db => db.host === ip.address());
 
 // configure middleware
-  
+
 app.set("port", process.env.port || port); // set express to use this port
 app.set("views", __dirname + "/views"); // set express to look in this folder to render our view
 app.set("view engine", "ejs"); // configure template engine
@@ -76,12 +82,9 @@ app.use(fileUpload()); // configure fileupload
 
 const db_master = mysql.createConnection(master);
 const db_shaheer = mysql.createConnection(shaheer);
-// const db_qadir = mysql.createConnection(qadir);
-
+const db_qadir = mysql.createConnection(qadir);
 
 // temp db //////////////////
-
-
 
 // connect
 db_master.connect(err => {
@@ -95,7 +98,6 @@ db_master.connect(err => {
   }
 });
 
-
 db_shaheer.connect(err => {
   if (err) {
     console.log(err);
@@ -105,22 +107,35 @@ db_shaheer.connect(err => {
     console.log("connected to ", shaheer);
   }
 });
-// db_qadir.connect(err => {
-//   if (err) {
-//     console.log(err);
-//     console.log("not allowed");
-//     console.log(qadir);
+db_qadir.connect(err => {
+  if (err) {
+    console.log(err);
+    console.log("not allowed");
+    console.log(qadir);
 
-//     // throw err;
-//   } else {
-//     console.log("connected to ", qadir);
-//   }
-// });
+    // throw err;
+  } else {
+    console.log("connected to ", qadir);
+  }
+});
 
-global.db_temp =  temp[0].db === "db_shaheer" ? db_shaheer : db_master
+function get_temp(db) {
+  if (db === "db_shaheer") {
+    return db_shaheer;
+  } else if (db === "db_qadir") {
+    return db_qadir;
+  } else {
+    return db_master;
+  }
+}
+
+global.db_temp = get_temp(temp[0].db);
+
+console.log(db_temp)
+
 global.db_master = db_master;
 global.db_shaheer = db_shaheer;
-// global.db_qadir = db_qadir;
+global.db_qadir = db_qadir;
 global.dbs = [db_master, db_shaheer];
 //routes of page
 //get
@@ -147,6 +162,11 @@ app.get("/editVendor/:id", editVendorPage);
 app.get("/editMedicine/:id", editMedicinePage);
 app.get("/editAppointment/:id", editAppointmentPage);
 app.get("/dashboard/Add-appointment", getAddAppointmentPage);
+app.get("/update-patient", updatePatientMaster);
+app.get("/update-doctor", updateDoctorMaster);
+app.get("/update-appointment", updateAppointmentMaster);
+app.get("/update-medicines", updatePharmacyMaster);
+app.get("/update-vendors", updateVendorMaster);
 
 //post
 app.post("/login", getLoginAccess);

@@ -42,6 +42,18 @@ module.exports = {
       "', '" +
       branch +
       "')";
+      let query_temp =
+      "INSERT INTO `vendor_temp` (firstname, lastname,contact,v_username,branch) VALUES ('" +
+      firstname +
+      "', '" +
+      lastname +
+      "', '" +
+      contact +
+      "', '" +
+      v_username +
+      "', '" +
+      branch +
+      "')";
     //////////////// sync //////////////////
     if (method === "sync") {
       dbs.forEach(db => {
@@ -57,19 +69,15 @@ module.exports = {
       });
       res.redirect("/dashboard/vendors");
     } else if (method === "async") {
-      dbs.forEach(db => {
-        if (ip.address() == "10.57.11.228") {
-          try {
-            db.query(query, (err, result) => {
-              if (err) {
-                return res.status(500).send(err);
-              }
-            });
-          } catch (e) {
-            console.log(e);
+      try {
+        db_temp.query(query_temp, (err, result) => {
+          if (err) {
+            return res.status(500).send(err);
           }
-        }
-      });
+        });
+      } catch (e) {
+        console.log(e);
+      }
       res.redirect("/dashboard/vendors");
     } else {
       res.redirect("/dashboard/vendors");

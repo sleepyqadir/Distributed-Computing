@@ -33,6 +33,7 @@ module.exports = {
     let address = req.body.address;
     let d_username = req.body.d_username;
     let branch = req.body.branch;
+    let method = req.body.method
     let query =
       "INSERT INTO `doctor` (firstname, lastname,d_username,specialist,contact,address,branch) VALUES ('" +
       firstname +
@@ -50,7 +51,7 @@ module.exports = {
       branch +
       "')";
     //////////////// sync //////////////////
-    if ("sync" === "sync") {
+    if (method === "sync") {
       dbs.forEach(db => {
         try {
           db.query(query, (err, result) => {
@@ -65,6 +66,21 @@ module.exports = {
       });
       res.redirect("/dashboard/doctor");
     }
+    else if (method === "async") {
+      try {
+        db_temp.query(query_temp, (err, result) => {
+          if (err) {
+            return res.status(500).send(err);
+          }
+        });
+      } catch (e) {
+        console.log(e);
+      }
+    res.redirect("/dashboard/doctor");
+  }
+  else {
+    res.redirect("/dashboard/doctor");
+  }
   },
   deleteDoctor: (req, res) => {
     let DoctorId = req.params.id;
