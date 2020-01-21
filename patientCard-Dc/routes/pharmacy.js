@@ -14,7 +14,7 @@ module.exports = {
       }
       res.render("pharmacy.ejs", {
         title: "patients",
-        patients: [...result,...result_temp]
+        medicines: [...result,...result_temp]
       }); 
     });
   });

@@ -12,9 +12,9 @@ module.exports = {
         console.log(err);
         res.redirect("/dashboard");
       }
-      res.render("vendor.ejs", {
+      res.render("vendors.ejs", {
         title: "patients",
-        patients: [...result,...result_temp]
+        vendors: [...result,...result_temp]
       }); 
     });
   });

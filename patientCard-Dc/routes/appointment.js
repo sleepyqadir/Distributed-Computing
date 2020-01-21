@@ -14,7 +14,7 @@ module.exports = {
       }
       res.render("appointment.ejs", {
         title: "patients",
-        patients: [...result,...result_temp]
+        appointment: [...result,...result_temp]
       }); 
     });
   });
