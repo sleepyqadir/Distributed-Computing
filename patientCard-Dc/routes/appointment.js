@@ -52,9 +52,7 @@ module.exports = {
             "', '" +
             date +
             "')";
-            let query =
-
-            "INSERT INTO `appointment_temp` (p_name,p_username,doctor,d_username,date) VALUES ('" +
+            let query_temp = "INSERT INTO `appointment_temp` (p_name,p_username,doctor,d_username,date) VALUES ('" +
             patient[0].firstname +
             "', '" +
             p_username +
