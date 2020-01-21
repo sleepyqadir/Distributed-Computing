@@ -8,7 +8,7 @@ module.exports = {
       if (err) {
         console.log(err);
         res.redirect("/dashboard/patients");
-    }
+      }
       result.forEach(element => {
         let query_insert =
           "INSERT INTO `patient` (firstname, lastname,p_username,gender,contact,address,branch) VALUES ('" +
@@ -51,7 +51,7 @@ module.exports = {
   updateDoctorMaster: (req, res) => {
     let query = "SELECT * FROM `doctor_temp`"; // query database to get all the players
     let query_delete = "TRUNCATE `doctor_temp`";
-      db_temp.query(query, (err, result) => {
+    db_temp.query(query, (err, result) => {
       if (err) {
         console.log(err);
         res.redirect("/dashboard/doctor");
@@ -101,30 +101,49 @@ module.exports = {
     db_temp.query(query, (err, result) => {
       if (err) {
         console.log(err);
-        res.redirect("/dashboard/appointment");
+        res.redirect("/dashboard/doctor");
       }
       result.forEach(element => {
-        let query =
-          "INSERT INTO `appointment` (p_name,p_username,doctor,d_username,date) VALUES ('" +
-          element.firstname +
-          "', '" +
-          element.p_username +
-          "', '" +
-          element.firstname +
-          "', '" +
-          element.d_username +
-          "', '" +
-          element.date +
-          "')";
-        try {
-          db_master.query(query, (err, result) => {
+        let adr1 = element.p_username;
+        let adr2 = element.d_username;
+        let sql1 = "SELECT firstname FROM patient WHERE p_username = ?";
+        let sql2 = "SELECT firstname FROM doctor WHERE d_username = ?";
+
+        //////////////// sync //////////////////
+        db_master.query(sql1, [adr1], (err, patient) => {
+          if (err) {
+            throw err;
+          }
+          db_master.query(sql2, [adr2], (err, doctor) => {
             if (err) {
-              return res.status(500).send(err);
+              throw err;
+            }
+            let query =
+              "INSERT INTO `appointment` (p_name,p_username,doctor,d_username,date) VALUES ('" +
+              patient[0].firstname +
+              "', '" +
+              element.p_username +
+              "', '" +
+              doctor[0].firstname +
+              "', '" +
+              element.d_username +
+              "', '" +
+              element.date +
+              "')";
+            try {
+              console.log("db");
+              db_master.query(query, (err, result) => {
+                console.log("QUERY");
+                if (err) {
+                  console.log(err);
+                  return res.status(500).send(err);
+                }
+              });
+            } catch (e) {
+              console.log(e);
             }
           });
-        } catch (e) {
-          console.log(e);
-        }
+        });
       });
     });
     try {

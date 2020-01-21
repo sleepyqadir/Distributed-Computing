@@ -38,7 +38,7 @@ module.exports = {
     let sql2 = "SELECT firstname FROM doctor WHERE d_username = ?";
 
     //////////////// sync //////////////////
-    db_master.query(sql1, [adr1], (err, patient) => {
+      db_master.query(sql1, [adr1], (err, patient) => {
       if (err) {
         throw err;
       }
@@ -102,7 +102,6 @@ module.exports = {
       });
     });
     console.log("adding done");
-    res.redirect("/dashboard/appointment");
   },
   deleteAppointment: (req, res) => {
     let p_username = req.params.id;
@@ -116,7 +115,6 @@ module.exports = {
             console.log(err);
             return res.status(500).send(err);
           }
-          console.log(result);
         });
       });
       res.redirect("/dashboard/appointment");

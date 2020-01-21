@@ -64,10 +64,13 @@ const config = require("./config.json");
 const master = config.master;
 const shaheer = config.shaheer;
 const qadir = config.qadir;
-const configs_array = [master, shaheer,qadir];
+// const configs_array = [master, shaheer,qadir];
+const configs_array = [master, shaheer];
+
+
 
 const temp = configs_array.filter(db => db.host === ip.address());
-
+// const temp = [shaheer]
 // configure middleware
 
 app.set("port", process.env.port || port); // set express to use this port
@@ -82,7 +85,7 @@ app.use(fileUpload()); // configure fileupload
 
 const db_master = mysql.createConnection(master);
 const db_shaheer = mysql.createConnection(shaheer);
-const db_qadir = mysql.createConnection(qadir);
+// const db_qadir = mysql.createConnection(qadir);
 
 // temp db //////////////////
 
@@ -107,17 +110,17 @@ db_shaheer.connect(err => {
     console.log("connected to ", shaheer);
   }
 });
-db_qadir.connect(err => {
-  if (err) {
-    console.log(err);
-    console.log("not allowed");
-    console.log(qadir);
+// db_qadir.connect(err => {
+//   if (err) {
+//     console.log(err);
+//     console.log("not allowed");
+//     console.log(qadir);
 
-    // throw err;
-  } else {
-    console.log("connected to ", qadir);
-  }
-});
+//     // throw err;
+//   } else {
+//     console.log("connected to ", qadir);
+//   }
+// });
 
 function get_temp(db) {
   if (db === "db_shaheer") {
@@ -135,7 +138,7 @@ console.log(db_temp)
 
 global.db_master = db_master;
 global.db_shaheer = db_shaheer;
-global.db_qadir = db_qadir;
+// global.db_qadir = db_qadir;
 global.dbs = [db_master, db_shaheer];
 //routes of page
 //get
