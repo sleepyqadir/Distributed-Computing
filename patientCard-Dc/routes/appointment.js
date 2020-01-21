@@ -1,23 +1,23 @@
 module.exports = {
   getAppointmentPage: (req, res) => {
     let query = "SELECT * FROM `appointment`"; // query database to get all the players
-    let query_temp = "SELECT * FROM `appointment_temp`"; // query database to get all the players  
+    let query_temp = "SELECT * FROM `appointment_temp`"; // query database to get all the players
     db_master.query(query, (err, result) => {
       if (err) {
         console.log(err);
         res.redirect("/dashboard");
       }
-    db_temp.query(query_temp,(err,result_temp)=>{
-      if (err) {
-        console.log(err);
-        res.redirect("/dashboard");
-      }
-      res.render("appointment.ejs", {
-        title: "patients",
-        appointment: [...result,...result_temp]
-      }); 
+      db_temp.query(query_temp, (err, result_temp) => {
+        if (err) {
+          console.log(err);
+          res.redirect("/dashboard");
+        }
+        res.render("appointment.ejs", {
+          title: "patients",
+          appointment: [...result, ...result_temp]
+        });
+      });
     });
-  });
   },
   getAddAppointmentPage: (req, res) => {
     res.render("add-appointment.ejs", {
@@ -38,37 +38,38 @@ module.exports = {
     let sql2 = "SELECT firstname FROM doctor WHERE d_username = ?";
 
     //////////////// sync //////////////////
-      db_master.query(sql1, [adr1], (err, patient) => {
+    db_master.query(sql1, [adr1], (err, patient) => {
+      if (err) {
+        throw err;
+      }
+      db_master.query(sql2, [adr2], (err, doctor) => {
         if (err) {
           throw err;
         }
-      db_master.query(sql2, [adr2], (err, doctor) => {
-          if (err) {
-            throw err;
-          }
-          let query =
-            "INSERT INTO `appointment` (p_name,p_username,doctor,d_username,date) VALUES ('" +
-            patient[0].firstname +
-            "', '" +
-            p_username +
-            "', '" +
-            doctor[0].firstname +
-            "', '" +
-            d_username +
-            "', '" +
-            date +
-            "')";
-            let query_temp = "INSERT INTO `appointment_temp` (p_name,p_username,doctor,d_username,date) VALUES ('" +
-            patient[0].firstname +
-            "', '" +
-            p_username +
-            "', '" +
-            doctor[0].firstname +
-            "', '" +
-            d_username +
-            "', '" +
-            date +
-            "')";
+        let query =
+          "INSERT INTO `appointment` (p_name,p_username,doctor,d_username,date) VALUES ('" +
+          patient[0].firstname +
+          "', '" +
+          p_username +
+          "', '" +
+          doctor[0].firstname +
+          "', '" +
+          d_username +
+          "', '" +
+          date +
+          "')";
+        let query_temp =
+          "INSERT INTO `appointment_temp` (p_name,p_username,doctor,d_username,date) VALUES ('" +
+          patient[0].firstname +
+          "', '" +
+          p_username +
+          "', '" +
+          doctor[0].firstname +
+          "', '" +
+          d_username +
+          "', '" +
+          date +
+          "')";
         if (method === "sync") {
           dbs.forEach(db => {
             try {
@@ -84,26 +85,24 @@ module.exports = {
               console.log(e);
             }
           });
-        }
-        else if (method === "async") {
+        } else if (method === "async") {
           try {
             db_temp.query(query_temp, (err, result) => {
               if (err) {
                 return res.status(500).send(err);
               }
             });
+            res.redirect("/dashboard/appointment");
           } catch (e) {
             console.log(e);
           }
-        res.redirect("/dashboard/appointment");
-      }
-      else {
-        res.redirect("/dashboard/appointment");
-      }
-        });
+        } else {
+          res.redirect("/dashboard/appointment");
+        }
       });
-      console.log("adding done");
-      res.redirect("/dashboard/appointment");
+    });
+    console.log("adding done");
+    res.redirect("/dashboard/appointment");
   },
   deleteAppointment: (req, res) => {
     let p_username = req.params.id;
@@ -144,7 +143,7 @@ module.exports = {
     }
     let appointId = req.params.id;
     let { p_username, d_username, date } = req.body;
-    console.log(p_username,d_username)
+    console.log(p_username, d_username);
     let query =
       "UPDATE `appointment` SET `p_username` = '" +
       p_username +
