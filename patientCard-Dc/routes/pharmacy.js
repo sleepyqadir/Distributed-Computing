@@ -1,17 +1,23 @@
 module.exports = {
   getPharmacyPage: (req, res) => {
     let query = "SELECT * FROM `medicine`"; // query database to get all the players
+    let query_temp = "SELECT * FROM `medicine_temp`"; // query database to get all the players  
     db_master.query(query, (err, result) => {
       if (err) {
         console.log(err);
         res.redirect("/dashboard");
       }
+    db_temp.query(query_temp,(err,result_temp)=>{
+      if (err) {
+        console.log(err);
+        res.redirect("/dashboard");
+      }
       res.render("pharmacy.ejs", {
-        title: "welcome to patientCard",
-        message: "",
-        medicines: result
-      });
+        title: "patients",
+        patients: [...result,...result_temp]
+      }); 
     });
+  });
   },
   getAddMedicinesPage: (req, res) => {
     res.render("add-medicines.ejs", {

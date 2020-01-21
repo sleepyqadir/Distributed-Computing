@@ -1,17 +1,23 @@
 module.exports = {
   getVendorsPage: (req, res) => {
     let query = "SELECT * FROM `vendor`"; // query database to get all the players
+    let query_temp = "SELECT * FROM `vendor_temp`"; // query database to get all the players  
     db_master.query(query, (err, result) => {
       if (err) {
         console.log(err);
         res.redirect("/dashboard");
       }
-      res.render("vendors.ejs", {
-        title: "welcome to patientCard",
-        message: "",
-        vendors: result
-      });
+    db_temp.query(query_temp,(err,result_temp)=>{
+      if (err) {
+        console.log(err);
+        res.redirect("/dashboard");
+      }
+      res.render("vendor.ejs", {
+        title: "patients",
+        patients: [...result,...result_temp]
+      }); 
     });
+  });
   },
   getAddVendorsPage: (req, res) => {
     res.render("add-vendors.ejs", {

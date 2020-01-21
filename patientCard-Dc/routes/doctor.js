@@ -1,15 +1,21 @@
 module.exports = {
   getDoctorPage: (req, res) => {
     let query = "SELECT * FROM `doctor`"; // query database to get all the players
-    db_master.query(query, (err, result) => {
-      if (err) {
-        console.log(err);
-        res.redirect("/dashboard");
-      }
-      console.log(result);
-      res.render("doctor.ejs", {
-        title: "doctor",
-        doctor: result
+    let query_temp = "SELECT * FROM `doctor_temp`"; // query database to get all the players  
+      db_master.query(query, (err, result) => {
+        if (err) {
+          console.log(err);
+          res.redirect("/dashboard");
+        }
+      db_temp.query(query_temp,(err,result_temp)=>{
+        if (err) {
+          console.log(err);
+          res.redirect("/dashboard");
+        }
+        res.render("patients.ejs", {
+          title: "patients",
+          patients: [...result,...result_temp]
+        }); 
       });
     });
   },

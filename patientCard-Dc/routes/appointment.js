@@ -1,17 +1,23 @@
 module.exports = {
   getAppointmentPage: (req, res) => {
     let query = "SELECT * FROM `appointment`"; // query database to get all the players
+    let query_temp = "SELECT * FROM `appointment_temp`"; // query database to get all the players  
     db_master.query(query, (err, result) => {
       if (err) {
         console.log(err);
         res.redirect("/dashboard");
       }
-      console.log(result);
+    db_temp.query(query_temp,(err,result_temp)=>{
+      if (err) {
+        console.log(err);
+        res.redirect("/dashboard");
+      }
       res.render("appointment.ejs", {
-        title: "appointment",
-        appointment: result
-      });
+        title: "patients",
+        patients: [...result,...result_temp]
+      }); 
     });
+  });
   },
   getAddAppointmentPage: (req, res) => {
     res.render("add-appointment.ejs", {
