@@ -1,13 +1,14 @@
+const ip = require("ip");
+
 module.exports = {
   updatePatientMaster: (req, res) => {
     let query = "SELECT * FROM `patient_temp`"; // query database to get all the players
     let query_delete = "TRUNCATE `patient_temp`";
-    db_shaheer.query(query, (err, result) => {
+    db_temp.query(query, (err, result) => {
       if (err) {
         console.log(err);
         res.redirect("/dashboard/patients");
-      }
-
+    }
       result.forEach(element => {
         let query_insert =
           "INSERT INTO `patient` (firstname, lastname,p_username,gender,contact,address,branch) VALUES ('" +
@@ -37,7 +38,7 @@ module.exports = {
       });
     });
     try {
-      db_shaheer.query(query_delete, (err, result) => {
+      db_temp.query(query_delete, (err, result) => {
         if (err) {
           return res.status(500).send(err);
         }
@@ -50,12 +51,11 @@ module.exports = {
   updateDoctorMaster: (req, res) => {
     let query = "SELECT * FROM `doctor_temp`"; // query database to get all the players
     let query_delete = "TRUNCATE `doctor_temp`";
-    db_shaheer.query(query, (err, result) => {
+    db_temp.query(query, (err, result) => {
       if (err) {
         console.log(err);
         res.redirect("/dashboard/doctor");
       }
-
       result.forEach(element => {
         let query =
           "INSERT INTO `doctor` (firstname, lastname,d_username,specialist,contact,address,branch) VALUES ('" +
@@ -85,7 +85,7 @@ module.exports = {
       });
     });
     try {
-      db_shaheer.query(query_delete, (err, result) => {
+      db_temp.query(query_delete, (err, result) => {
         if (err) {
           return res.status(500).send(err);
         }
@@ -98,7 +98,7 @@ module.exports = {
   updateAppointmentMaster: (req, res) => {
     let query = "SELECT * FROM `appointment_temp`"; // query database to get all the players
     let query_delete = "TRUNCATE `appointment_temp`";
-    db_shaheer.query(query, (err, result) => {
+    db_temp.query(query, (err, result) => {
       if (err) {
         console.log(err);
         res.redirect("/dashboard/appointment");
@@ -128,7 +128,7 @@ module.exports = {
       });
     });
     try {
-      db_shaheer.query(query_delete, (err, result) => {
+      db_temp.query(query_delete, (err, result) => {
         if (err) {
           return res.status(500).send(err);
         }
@@ -141,7 +141,7 @@ module.exports = {
   updatePharmacyMaster: (req, res) => {
     let query = "SELECT * FROM `medicine_temp`"; // query database to get all the players
     let query_delete = "TRUNCATE `medicine_temp`";
-    db_shaheer.query(query, (err, result) => {
+    db_temp.query(query, (err, result) => {
       if (err) {
         console.log(err);
         res.redirect("/dashboard/pharmacy");
@@ -169,7 +169,7 @@ module.exports = {
       });
     });
     try {
-      db_shaheer.query(query_delete, (err, result) => {
+      db_temp.query(query_delete, (err, result) => {
         if (err) {
           return res.status(500).send(err);
         }
@@ -182,7 +182,7 @@ module.exports = {
   updateVendorMaster: (req, res) => {
     let query = "SELECT * FROM `vendor_temp`"; // query database to get all the players
     let query_delete = "TRUNCATE `vendor_temp`";
-    db_shaheer.query(query, (err, result) => {
+    db_temp.query(query, (err, result) => {
       if (err) {
         console.log(err);
         res.redirect("/dashboard/vendors");
@@ -212,7 +212,7 @@ module.exports = {
       });
     });
     try {
-      db_shaheer.query(query_delete, (err, result) => {
+      db_temp.query(query_delete, (err, result) => {
         if (err) {
           return res.status(500).send(err);
         }

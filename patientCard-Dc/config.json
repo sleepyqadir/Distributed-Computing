@@ -1,20 +1,20 @@
 {
     "master" : {
-        "host" : "10.57.57.50",
+        "host" : "192.168.100.92",
         "user" : "patient_card",
         "password" : "pc123456",
         "database" : "patientCard",
         "db" : "db_master"
     },
     "shaheer" :{
-        "host" : "192.168.1.120", 
+        "host" : "192.168.100.94", 
         "user" : "patient_card",
         "password" :"pc123456",
-        "database" : "patientcard",
+        "database" : "patientCard",
         "db" : "db_shaheer"
     },
     "qadir" : {
-        "host" : "",
+        "host" : "192.168.100.91",
         "user" : "patient_card",
         "password" :"pc123456",
         "database" : "patientCard",
