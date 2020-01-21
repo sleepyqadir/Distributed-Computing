@@ -52,6 +52,19 @@ module.exports = {
             "', '" +
             date +
             "')";
+            let query =
+
+            "INSERT INTO `appointment_temp` (p_name,p_username,doctor,d_username,date) VALUES ('" +
+            patient[0].firstname +
+            "', '" +
+            p_username +
+            "', '" +
+            doctor[0].firstname +
+            "', '" +
+            d_username +
+            "', '" +
+            date +
+            "')";
         if (method === "sync") {
           dbs.forEach(db => {
             try {
