@@ -1,23 +1,23 @@
 module.exports = {
   getPharmacyPage: (req, res) => {
     let query = "SELECT * FROM `medicine`"; // query database to get all the players
-    let query_temp = "SELECT * FROM `medicine_temp`"; // query database to get all the players  
+    let query_temp = "SELECT * FROM `medicine_temp`"; // query database to get all the players
     db_master.query(query, (err, result) => {
       if (err) {
         console.log(err);
         res.redirect("/dashboard");
       }
-    db_temp.query(query_temp,(err,result_temp)=>{
-      if (err) {
-        console.log(err);
-        res.redirect("/dashboard");
-      }
-      res.render("pharmacy.ejs", {
-        title: "patients",
-        medicines: [...result,...result_temp]
-      }); 
+      db_temp.query(query_temp, (err, result_temp) => {
+        if (err) {
+          console.log(err);
+          res.redirect("/dashboard");
+        }
+        res.render("pharmacy.ejs", {
+          title: "patients",
+          medicines: [...result, ...result_temp]
+        });
+      });
     });
-  });
   },
   getAddMedicinesPage: (req, res) => {
     res.render("add-medicines.ejs", {
@@ -27,7 +27,6 @@ module.exports = {
   },
   addMedicine: (req, res) => {
     if (!req.body) {
-      console.log(req.body);
       return res.status(400).send("No files were uploaded.");
     }
     let m_name = req.body.m_name;
@@ -46,7 +45,7 @@ module.exports = {
       branch +
       "')";
 
-      let query_temp =
+    let query_temp =
       "INSERT INTO `medicine_temp` (v_username,m_name,quantity,branch) VALUES ('" +
       v_username +
       "', '" +
@@ -80,7 +79,7 @@ module.exports = {
       } catch (e) {
         console.log(e);
       }
-    res.redirect("/dashboard/pharmacy");
+      res.redirect("/dashboard/pharmacy");
     } else {
       res.redirect("/dashboard/pharmacy");
     }
@@ -91,12 +90,10 @@ module.exports = {
       'DELETE FROM medicine WHERE v_username = "' + v_username + '"';
     //////////////// sync //////////////////
     if ("sync" === "sync") {
-      dbs.forEach(db => {
-        db.query(deleteUserQuery, (err, result) => {
-          if (err) {
-            return res.status(500).send(err);
-          }
-        });
+      db_master.query(deleteUserQuery, (err, result) => {
+        if (err) {
+          return res.status(500).send(err);
+        }
       });
       res.redirect("/dashboard/pharmacy");
     }
@@ -133,13 +130,11 @@ module.exports = {
       "'";
     //////////////// sync //////////////////
     if ("sync" === "sync") {
-      dbs.forEach(db => {
-        db.query(query, (err, result) => {
-          if (err) {
-            console.log(err)
-            return res.status(500).send(err);
-          }
-        });
+      db_master.query(query, (err, result) => {
+        if (err) {
+          console.log(err);
+          return res.status(500).send(err);
+        }
       });
       res.redirect("/dashboard/pharmacy");
     }

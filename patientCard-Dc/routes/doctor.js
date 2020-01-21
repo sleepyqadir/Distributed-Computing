@@ -1,21 +1,22 @@
+var alert = require("alert-node");
 module.exports = {
   getDoctorPage: (req, res) => {
     let query = "SELECT * FROM `doctor`"; // query database to get all the players
-    let query_temp = "SELECT * FROM `doctor_temp`"; // query database to get all the players  
-      db_master.query(query, (err, result) => {
-        if (err) {
-          console.log(err);
-          res.redirect("/dashboard");
-        }
-      db_temp.query(query_temp,(err,result_temp)=>{
+    let query_temp = "SELECT * FROM `doctor_temp`"; // query database to get all the players
+    db_master.query(query, (err, result) => {
+      if (err) {
+        console.log(err);
+        res.redirect("/dashboard");
+      }
+      db_temp.query(query_temp, (err, result_temp) => {
         if (err) {
           console.log(err);
           res.redirect("/dashboard");
         }
         res.render("doctor.ejs", {
           title: "patients",
-          doctor: [...result,...result_temp]
-        }); 
+          doctor: [...result, ...result_temp]
+        });
       });
     });
   },
@@ -39,7 +40,7 @@ module.exports = {
     let address = req.body.address;
     let d_username = req.body.d_username;
     let branch = req.body.branch;
-    let method = req.body.method
+    let method = req.body.method;
     let query =
       "INSERT INTO `doctor` (firstname, lastname,d_username,specialist,contact,address,branch) VALUES ('" +
       firstname +
@@ -56,7 +57,7 @@ module.exports = {
       "', '" +
       branch +
       "')";
-      let query_temp =
+    let query_temp =
       "INSERT INTO `doctor_temp` (firstname, lastname,d_username,specialist,contact,address,branch) VALUES ('" +
       firstname +
       "', '" +
@@ -87,8 +88,7 @@ module.exports = {
         }
       });
       res.redirect("/dashboard/doctor");
-    }
-    else if (method === "async") {
+    } else if (method === "async") {
       try {
         db_temp.query(query_temp, (err, result) => {
           if (err) {
@@ -98,28 +98,33 @@ module.exports = {
       } catch (e) {
         console.log(e);
       }
-    res.redirect("/dashboard/doctor");
-  }
-  else {
-    res.redirect("/dashboard/doctor");
-  }
+      res.redirect("/dashboard/doctor");
+    } else {
+      res.redirect("/dashboard/doctor");
+    }
   },
   deleteDoctor: (req, res) => {
-    let DoctorId = req.params.id;
-    let deleteUserQuery =
-      'DELETE FROM doctor WHERE contact = "' + DoctorId + '"';
-    //////////////// sync //////////////////
-    if ("sync" === "sync") {
-      dbs.forEach(db => {
-        db.query(deleteUserQuery, (err, result) => {
+    console.log(req.params.id);
+    let adr1 = req.params.id;
+    let sql1 = "SELECT * FROM appointment WHERE d_username = ?";
+    db_master.query(sql1, [adr1], (err, patient) => {
+      if (err) {
+        throw err;
+      }
+      let DoctorId = req.params.id;
+      let deleteUserQuery =
+        'DELETE FROM doctor WHERE d_username = "' + DoctorId + '"';
+      if (patient.length === 0) {
+        db_master.query(deleteUserQuery, (err, result) => {
           if (err) {
             return res.status(500).send(err);
           }
-          console.log(result);
         });
-      });
+      } else {
+        alert("can not delete due to appointment exits");
+      }
       res.redirect("/dashboard/doctor");
-    }
+    });
   },
   editDoctorPage: (req, res) => {
     let doctorId = req.params.id;
@@ -156,13 +161,11 @@ module.exports = {
       "'";
     //////////////// sync //////////////////
     if ("sync" === "sync") {
-      dbs.forEach(db => {
-        db.query(query, (err, result) => {
-          if (err) {
-            return res.status(500).send(err);
-          }
-          console.log(res);
-        });
+      db_master.query(query, (err, result) => {
+        if (err) {
+          return res.status(500).send(err);
+        }
+        console.log(res);
       });
       res.redirect("/dashboard/doctor");
     }

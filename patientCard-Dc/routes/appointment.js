@@ -38,7 +38,7 @@ module.exports = {
     let sql2 = "SELECT firstname FROM doctor WHERE d_username = ?";
 
     //////////////// sync //////////////////
-      db_master.query(sql1, [adr1], (err, patient) => {
+    db_master.query(sql1, [adr1], (err, patient) => {
       if (err) {
         throw err;
       }
@@ -109,13 +109,11 @@ module.exports = {
       'DELETE FROM appointment WHERE p_username = "' + p_username + '"';
     //////////////// sync //////////////////
     if ("sync" === "sync") {
-      dbs.forEach(db => {
-        db.query(deleteUserQuery, (err, result) => {
-          if (err) {
-            console.log(err);
-            return res.status(500).send(err);
-          }
-        });
+      db_master.query(deleteUserQuery, (err, result) => {
+        if (err) {
+          console.log(err);
+          return res.status(500).send(err);
+        }
       });
       res.redirect("/dashboard/appointment");
     }
@@ -154,13 +152,11 @@ module.exports = {
       "'";
     //////////////// sync //////////////////
     if ("sync" === "sync") {
-      dbs.forEach(db => {
-        db.query(query, (err, result) => {
-          if (err) {
-            return res.status(500).send(err);
-          }
-          console.log(result);
-        });
+      db_master.query(query, (err, result) => {
+        if (err) {
+          return res.status(500).send(err);
+        }
+        console.log(result);
       });
       console.log("adding done");
       res.redirect("/dashboard/appointment");

@@ -1,23 +1,24 @@
+var alert = require("alert-node");
 module.exports = {
   getVendorsPage: (req, res) => {
     let query = "SELECT * FROM `vendor`"; // query database to get all the players
-    let query_temp = "SELECT * FROM `vendor_temp`"; // query database to get all the players  
+    let query_temp = "SELECT * FROM `vendor_temp`"; // query database to get all the players
     db_master.query(query, (err, result) => {
       if (err) {
         console.log(err);
         res.redirect("/dashboard");
       }
-    db_temp.query(query_temp,(err,result_temp)=>{
-      if (err) {
-        console.log(err);
-        res.redirect("/dashboard");
-      }
-      res.render("vendors.ejs", {
-        title: "patients",
-        vendors: [...result,...result_temp]
-      }); 
+      db_temp.query(query_temp, (err, result_temp) => {
+        if (err) {
+          console.log(err);
+          res.redirect("/dashboard");
+        }
+        res.render("vendors.ejs", {
+          title: "patients",
+          vendors: [...result, ...result_temp]
+        });
+      });
     });
-  });
   },
   getAddVendorsPage: (req, res) => {
     res.render("add-vendors.ejs", {
@@ -27,7 +28,6 @@ module.exports = {
   },
   addVendors: (req, res) => {
     if (!req.body) {
-      console.log(req.body);
       return res.status(400).send("No files were uploaded.");
     }
     let firstname = req.body.firstname;
@@ -48,7 +48,7 @@ module.exports = {
       "', '" +
       branch +
       "')";
-      let query_temp =
+    let query_temp =
       "INSERT INTO `vendor_temp` (firstname, lastname,contact,v_username,branch) VALUES ('" +
       firstname +
       "', '" +
@@ -90,24 +90,31 @@ module.exports = {
     }
   },
   deleteVendor: (req, res) => {
-    let v_username = req.params.id;
-    let deleteUserQuery =
-      'DELETE FROM vendor WHERE v_username = "' + v_username + '"';
-    //////////////// sync //////////////////
-    if ("sync" === "sync") {
-      dbs.forEach(db => {
-        db.query(deleteUserQuery, (err, result) => {
+    let adr1 = req.params.id;
+    let sql1 = "SELECT * FROM medicine WHERE v_username = ?";
+    db_master.query(sql1, [adr1], (err, patient) => {
+      if (err) {
+        throw err;
+      }
+      let v_username = req.params.id;
+      let deleteUserQuery =
+        'DELETE FROM vendor WHERE v_username = "' + v_username + '"';
+      if (patient.length === 0) {
+        db_master.query(deleteUserQuery, (err, result) => {
           if (err) {
             return res.status(500).send(err);
           }
         });
-      });
+      } else {
+        alert("can not delete due to medicine exits");
+      }
       res.redirect("/dashboard/vendors");
-    }
+    });
   },
   editVendorPage: (req, res) => {
     let v_username = req.params.id;
-    let query = "SELECT * FROM `vendor` WHERE v_username = '" + v_username + "' ";
+    let query =
+      "SELECT * FROM `vendor` WHERE v_username = '" + v_username + "' ";
     db_master.query(query, (err, result) => {
       if (err) {
         return res.status(500).send(err);
@@ -124,7 +131,6 @@ module.exports = {
     let firstname = req.body.firstname;
     let lastname = req.body.lastname;
     let contact = req.body.contact;
-    console.log(lastname);
     let query =
       "UPDATE `vendor` SET `firstname` = '" +
       firstname +
@@ -135,14 +141,11 @@ module.exports = {
       "' WHERE `vendor`.`v_username` = '" +
       v_username +
       "'";
-    //////////////// sync //////////////////
     if ("sync" === "sync") {
-      dbs.forEach(db => {
-        db.query(query, (err, result) => {
-          if (err) {
-            return res.status(500).send(err);
-          }
-        });
+      db_master.query(query, (err, result) => {
+        if (err) {
+          return res.status(500).send(err);
+        }
       });
       res.redirect("/dashboard/vendors");
     }

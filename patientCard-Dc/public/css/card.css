@@ -228,54 +228,53 @@ input {
 /* ==========================================================================
    #BUTTON
    ========================================================================== */
-   .btn {
-    display: inline-block;
-    line-height: 50px;
-    padding: 0 50px;
-    -webkit-transition: all 0.4s ease;
-    -o-transition: all 0.4s ease;
-    -moz-transition: all 0.4s ease;
-    transition: all 0.4s ease;
-    cursor: pointer;
-    font-size: 18px;
-    color: #fff;
-    font-family: "Poppins", "Arial", "Helvetica Neue", sans-serif;
-  }
-  
-  .btn--radius {
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-  }
-  
-  .btn--radius-2 {
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-  }
-  
-  .btn--pill {
-    -webkit-border-radius: 20px;
-    -moz-border-radius: 20px;
-    border-radius: 20px;
-  }
-  
-  .btn--green {
-    background: #57b846;
-  }
-  
-  .btn--green:hover {
-    background: #4dae3c;
-  }
-  
-  .btn--blue {
-    background: #4272d7;
-  }
-  
-  .btn--blue:hover {
-    background: #3868cd;
-  }
-  
+.btn {
+  display: inline-block;
+  line-height: 50px;
+  padding: 0 50px;
+  -webkit-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  font-size: 18px;
+  color: #fff;
+  font-family: "Poppins", "Arial", "Helvetica Neue", sans-serif;
+}
+
+.btn--radius {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+.btn--radius-2 {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.btn--pill {
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+}
+
+.btn--green {
+  background: #57b846;
+}
+
+.btn--green:hover {
+  background: #4dae3c;
+}
+
+.btn--blue {
+  background: #4272d7;
+}
+
+.btn--blue:hover {
+  background: #3868cd;
+}
 
 .col-2 {
   width: -webkit-calc((100% - 30px) / 2);
@@ -358,33 +357,32 @@ input {
   display: none;
 }
 
-
 /* ==========================================================================
    #CARD
    ========================================================================== */
-   .cardd {
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    background: rgba(255, 255, 255, 0.822);
-  }
-  
-  .card-4 {
-    background: #fff;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
-    -webkit-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
-    -moz-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
-    box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
-  }
-  
-  .card-4 .card-body {
-    padding: 57px 65px;
-    padding-bottom: 65px;
-  }
-  
-  /* ==========================================================================
+.cardd {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.822);
+}
+
+.card-4 {
+  background: #fff;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+}
+
+.card-4 .card-body {
+  padding: 57px 65px;
+  padding-bottom: 65px;
+}
+
+/* ==========================================================================
    #SPACING
    ========================================================================== */
 .p-t-100 {
@@ -422,6 +420,13 @@ input {
 .m-r-45 {
   margin-right: 45px;
 }
+.center2 {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+  margin-top: -200px;
+}
 
 /* ==========================================================================
    #WRAPPER
@@ -444,4 +449,3 @@ input {
 .page-wrapper {
   min-height: 100vh;
 }
-

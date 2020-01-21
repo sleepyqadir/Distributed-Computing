@@ -1,71 +1,73 @@
 <div id="wrapper">
-    <%- include ('./partials/sidebar') %>
-    <div id="page-wrapper">
-      <div class="container-fluid">
-        <!-- Page Heading -->
-        <div class="row" id="main">
-          <div class="col-sm-12 col-md-12 well" id="content">
-            <h1>Medicines</h1>
+  <%- include ('./partials/sidebar') %>
+  <div id="page-wrapper">
+    <div class="container-fluid">
+      <!-- Page Heading -->
+      <div class="row" id="main">
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-default outer">
+              <div class="panel-heading headerbar">
+                <h2 class="text-center">Pharmacy</h2>
+              </div>
+              <div class="panel-body text-justify"></div>
+            </div>
           </div>
         </div>
-        <!-- /.row -->
       </div>
-      <!-- /.container-fluid -->
+      <!-- /.row -->
     </div>
-    <!-- /#page-wrapper -->
-    <% if (message) { %>
-    <p class="text-center text-danger"><%= message %></p>
-    <% } %> <% if (medicine) { %>
-    <form
-      class="edit-medicine-form"
-      action=""
-      method="post"
-      enctype="multipart/form-data"
-    >
-      <div class="form-row">
-        <div class="form-group col-md-4">
-          <input
-            type="text"
-            class="form-control"
-            name="m_name"
-            id="m_name"
-            placeholder="Medicine Name"
-            required
-          />
-        </div>
-        <div class="form-group col-md-4">
-            <input
-              type="text"
-              class="form-control"
-              name="v_username"
-              id="v_username"
-              placeholder="Vendor User Name"
-              required
-            />
-          </div>
-        <div class="form-group col-md-4"></div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <input
-            type="number"
-            class="form-control"
-            name="quantity"
-            id="quantity"
-            placeholder="Quantity"
-            required
-          />
-        </div>
-      </div>
-      <button type="submit" class="btn btn-success float-right">
-        Update Medicine
-      </button>
-    </form>
-    <% } else { %>
-    <p class="text-center">
-      Medicine Not Found. Go <a href="/dashboard/Add-medicines">here</a> to add
-      medicines.
-    </p>
-    <% } %>
+    <!-- /.container-fluid -->
   </div>
-  
+  <!-- /#page-wrapper -->
+  <% if (message) { %>
+  <p class="text-center text-danger"><%= message %></p>
+  <% } %> <% if (medicine) { %>
+
+  <div 6lass="wrapperr wrapper--w680">
+    <div class="cardd card-4">
+      <div class="card-body">
+        <form
+          class="add-patien6s-form"
+          action=""
+          method="post"
+          enctype="multipart/form-data"
+        >
+          <div class="roww row-space">
+            <div class="col-3">
+              <div class="input-group">
+                <label class="label1">Medicine Name</label>
+                <input class="input--style-4" type="text" name="m_name" />
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="input-group">
+                <label class="label1">Vendor User Name</label>
+                <input class="input--style-4" type="text" name="v_username" />
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="input-group">
+                <label class="label1">Quantity</label>
+                <input class="input--style-4" type="text" name="quantity" />
+              </div>
+            </div>
+          </div>
+          |
+          <div class="p-t-15">
+            <button class="btn btn--radius-2 btn--blue" type="submit">
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <% } else { %>
+  <p class="text-center">
+    Medicine Not Found. Go <a href="/dashboard/Add-medicines">here</a> to add
+    medicines.
+  </p>
+  <% } %>
+</div>
